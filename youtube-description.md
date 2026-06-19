@@ -1,8 +1,8 @@
-# YouTube — Baby Discrete Math
+# YouTube — Basic Discrete Math
 
 ## 🎬 Title options (pick one)
 
-1. Baby Discrete Math — an AI course that teaches, tutors & grades itself
+1. Basic Discrete Math — an AI course that teaches, tutors & grades itself
 2. I built an AI-powered course on discrete math (it even catches AI cheating)
 3. The Math of Distinct Things — a friendly discrete-math course for curious students & adults
 
@@ -10,7 +10,7 @@
 
 ## 📝 Description (paste into YouTube)
 
-Meet **Baby Discrete Math** — a friendly, one-unit intro to discrete math that teaches, tutors, drills, and grades itself, entirely with AI. No prior math, no coding, no jargon. Just plain-language lessons about the math of separate, distinct things — whole numbers, statements, sets, and networks — the natural math of computers: how logic's "if-then" works, why a hundred examples still don't prove a rule, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, and how induction lets you climb an infinite ladder, explained intuitively from start to finish.
+Meet **Basic Discrete Math** — a friendly, one-unit intro to discrete math that teaches, tutors, drills, and grades itself, entirely with AI. No prior math, no coding, no jargon. Just plain-language lessons about the math of separate, distinct things — whole numbers, statements, sets, and networks — the natural math of computers: how logic's "if-then" works, why a hundred examples still don't prove a rule, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, and how induction lets you climb an infinite ladder, explained intuitively from start to finish.
 
 In this video you'll see the whole course in action:
 
@@ -37,7 +37,7 @@ Start learning — no instructor, no textbook, no prior math.
 0:23 AI-graded feedback on every submission
 0:27 Progress and mastery analytics
 0:32 Operator diagnostics + two-layer AI detection
-0:37 Baby Discrete Math
+0:37 Basic Discrete Math
 
 ---
 

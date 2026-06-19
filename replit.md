@@ -1,4 +1,4 @@
-# 🔎 Baby Discrete Math
+# 🔎 Basic Discrete Math
 
 **A Friendly, One-Unit Intro to Discrete Math That Teaches, Tutors, and Proofs Itself — for Curious Students and Adults Alike**
 
@@ -6,13 +6,13 @@
 
 ## 🧩 Overview
 
-Baby Discrete Math is a self-paced, single-user web course that delivers a friendly, plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. No prior math or coding required; every idea is explained intuitively in plain words rather than heavy formulas.
+Basic Discrete Math is a self-paced, single-user web course that delivers a friendly, plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. No prior math or coding required; every idea is explained intuitively in plain words rather than heavy formulas.
 
 It turns one surprising idea — *that the math behind computers is really the math of distinct, countable things and the airtight reasoning that connects them* — into one product: read each lesson at the depth you want, ask a tutor scoped to the exact section you're on, drill questions whose difficulty adapts to you in real time, and submit homework, a unit test, and a final that are AI-graded with feedback and screened for AI-generated answers. The material is kept approachable and concrete — it shows how a logical "if-then" is false only when the 'if' is true and the 'then' is false, why a hundred examples still don't prove a rule, why {1,2,3} equals {3,2,1}, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, how 5 hours after 10 o'clock is 3, and how stepping onto the bottom rung and always reaching the next one lets you climb forever.
 
 The curriculum is organized into **one unit and 8 topics**: 1.1 what discrete math is (the math of distinct things); 1.2 logic (the machine code of reasoning); 1.3 proof (how you know something for certain); 1.4 sets, relations, and functions (the grammar of structure); 1.5 counting and the pigeonhole principle; 1.6 graphs (the hidden networks in everything); 1.7 modular arithmetic (clock math that secures the internet); and 1.8 recursion and induction (the capstone).
 
-Designed for **middle schoolers, curious adults wanting brief but meaningful exposure, instructors evaluating AI-taught coursework, and researchers studying AI academic integrity**, Baby Discrete Math pairs a real curriculum with two layers of AI-authorship detection — surfacing not just *whether* the writing looks AI-generated, but whether the *act of producing it* did.
+Designed for **middle schoolers, curious adults wanting brief but meaningful exposure, instructors evaluating AI-taught coursework, and researchers studying AI academic integrity**, Basic Discrete Math pairs a real curriculum with two layers of AI-authorship detection — surfacing not just *whether* the writing looks AI-generated, but whether the *act of producing it* did.
 
 ---
 
@@ -57,11 +57,11 @@ Designed for **middle schoolers, curious adults wanting brief but meaningful exp
 
 ## 💡 Core Idea
 
-Baby Discrete Math reframes an AI-taught course as a *closed accountability loop*.
+Basic Discrete Math reframes an AI-taught course as a *closed accountability loop*.
 
 It doesn't just teach the material and grade the homework — it **teaches**, **tutors**, **drills**, **grades**, **detects misuse**, and **proves the whole pipeline still works** with a single click. The result is a self-paced course that students can actually trust to be fair, and that instructors can actually trust to be honest.
 
-**Baby Discrete Math — where the curriculum, the tutor, the grader, and the integrity check all live in one room.**
+**Basic Discrete Math — where the curriculum, the tutor, the grader, and the integrity check all live in one room.**
 
 ---
 

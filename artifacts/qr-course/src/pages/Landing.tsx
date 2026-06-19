@@ -62,7 +62,7 @@ export default function Landing() {
             <Search className="w-4 h-4" />
           </div>
           <span className="font-serif font-semibold text-lg tracking-tight">
-            Baby Discrete Math
+            Basic Discrete Math
           </span>
         </div>
         <div className="flex items-center gap-2">
@@ -162,7 +162,7 @@ export default function Landing() {
       </main>
 
       <footer className="border-t border-border px-6 py-6 text-center text-sm text-muted-foreground">
-        Baby Discrete Math — where the curriculum, the tutor, the grader, and the
+        Basic Discrete Math — where the curriculum, the tutor, the grader, and the
         integrity check all live in one room.
       </footer>
     </div>

@@ -1,8 +1,8 @@
-# 🔎 Baby Discrete Math
+# 🔎 Basic Discrete Math
 
 **A friendly, one-unit intro to discrete math that teaches, tutors, drills, and grades itself — for curious students and adults alike.**
 
-Baby Discrete Math is a self-paced, single-user web course that delivers a plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. No prior math or coding required. Every idea is explained intuitively in plain words rather than heavy formulas: why an "if-then" is false only when the 'if' is true and the 'then' is false, why a hundred examples still don't prove a rule, why {1,2,3} equals {3,2,1}, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, and how stepping onto the bottom rung and always reaching the next one lets you climb forever.
+Basic Discrete Math is a self-paced, single-user web course that delivers a plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. No prior math or coding required. Every idea is explained intuitively in plain words rather than heavy formulas: why an "if-then" is false only when the 'if' is true and the 'then' is false, why a hundred examples still don't prove a rule, why {1,2,3} equals {3,2,1}, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, and how stepping onto the bottom rung and always reaching the next one lets you climb forever.
 
 ---
 
@@ -102,4 +102,4 @@ Open the **Diagnostics** page in the app (or hit the API directly) to run:
 
 ---
 
-*Baby Discrete Math — where the curriculum, the tutor, the grader, and the integrity check all live in one room.*
+*Basic Discrete Math — where the curriculum, the tutor, the grader, and the integrity check all live in one room.*

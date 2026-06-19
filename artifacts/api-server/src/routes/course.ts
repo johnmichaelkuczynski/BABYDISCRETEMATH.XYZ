@@ -21,7 +21,7 @@ const router: IRouter = Router();
 
 const WEEK_TITLES: Record<number, { title: string; summary: string }> = {
   1: {
-    title: "Baby Discrete Math: The Math of Distinct Things",
+    title: "Basic Discrete Math: The Math of Distinct Things",
     summary:
       "What discrete math really is and why the math of separate, distinct things — whole numbers, statements, sets, networks — is the natural math of computers, how logic turns reasoning into statements that are simply true or false, how a proof gives certainty no pile of examples can, how sets, relations, and functions form the grammar of structure, how counting and the pigeonhole principle reveal what's forced, how graphs model the hidden networks in everything, how modular arithmetic secures the internet, and how recursion and induction tie it all together — all in plain language, no prior math or coding required.",
   },
@@ -112,7 +112,7 @@ router.get("/course/overview", async (_req, res) => {
 
   res.json(
     GetCourseOverviewResponse.parse({
-      title: "Baby Discrete Math",
+      title: "Basic Discrete Math",
       weeks,
       totals: { assignmentsCompleted, assignmentsTotal, practiceCount },
     }),

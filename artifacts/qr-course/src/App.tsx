@@ -235,13 +235,13 @@ function ClerkProviderWithRoutes() {
         signIn: {
           start: {
             title: "Welcome back",
-            subtitle: "Sign in to continue your Baby Discrete Math course",
+            subtitle: "Sign in to continue your Basic Discrete Math course",
           },
         },
         signUp: {
           start: {
             title: "Create your account",
-            subtitle: "Start your discrete math journey with Baby Discrete Math",
+            subtitle: "Start your discrete math journey with Basic Discrete Math",
           },
         },
       }}

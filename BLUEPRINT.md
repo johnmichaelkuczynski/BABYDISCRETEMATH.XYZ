@@ -1,12 +1,12 @@
-# Baby Discrete Math — App Blueprint
+# Basic Discrete Math — App Blueprint
 
-A complete architectural blueprint for the Baby Discrete Math one-unit intro course on discrete mathematics. This document is the single reference for what the app does, how it's wired, and the contracts between pieces. For day-to-day commands and gotchas see `replit.md`.
+A complete architectural blueprint for the Basic Discrete Math one-unit intro course on discrete mathematics. This document is the single reference for what the app does, how it's wired, and the contracts between pieces. For day-to-day commands and gotchas see `replit.md`.
 
 ---
 
 ## 1. Product summary
 
-Baby Discrete Math is a self-paced, single-user, no-login web course covering a one-unit, plain-language intro to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers (8 topics, from "what discrete math is" through recursion and induction). Students read AI-rewritten lecture notes at three lengths, ask an AI tutor scoped to the section they're reading, drill on adaptive practice problems, and submit homework / a unit test / a final that are AI-graded and AI-detection-screened.
+Basic Discrete Math is a self-paced, single-user, no-login web course covering a one-unit, plain-language intro to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers (8 topics, from "what discrete math is" through recursion and induction). Students read AI-rewritten lecture notes at three lengths, ask an AI tutor scoped to the section they're reading, drill on adaptive practice problems, and submit homework / a unit test / a final that are AI-graded and AI-detection-screened.
 
 The product surface is two deployable artifacts in one pnpm monorepo:
 
