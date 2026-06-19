@@ -68,4 +68,6 @@ It doesn't just teach the material and grade the homework — it **teaches**, **
 ## 👤 User preferences
 
 - The user prefers to **convert the existing app in place** (e.g. replacing the prior course content/branding with the new subject) rather than create a standalone clone — keep all functionality and format intact when making content/branding changes.
+- **YouTube description title format is fixed:** it must ALWAYS be exactly `X — AI-Powered Course` (e.g. `Basic Discrete Math — AI-Powered Course`). No descriptors, taglines, or extra clauses appended (never `… — an AI-Powered Course that teaches and grades!`). One title only, no alternates.
+- **App names must be the most literal, utilitarian name possible** — e.g. `Data Analytics`, `Ethics`, `Formal Logic`, `Basic AI`, `Basic Discrete Math`. Never goofy, funny, or cute. The literal name must be used consistently everywhere it appears (README, replit.md, the video, in-app copy).
 

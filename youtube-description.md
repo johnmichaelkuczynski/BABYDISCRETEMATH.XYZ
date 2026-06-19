@@ -1,10 +1,8 @@
 # YouTube — Basic Discrete Math
 
-## 🎬 Title options (pick one)
+## 🎬 Title
 
-1. Basic Discrete Math — an AI course that teaches, tutors & grades itself
-2. I built an AI-powered course on discrete math (it even catches AI cheating)
-3. The Math of Distinct Things — a complete discrete-math course taught, tutored & graded by AI
+Basic Discrete Math — AI-Powered Course
 
 ---
 
