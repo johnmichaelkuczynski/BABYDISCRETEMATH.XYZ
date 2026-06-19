@@ -13,7 +13,7 @@ const PHASE_SHORT: Record<string, string> = {
 };
 
 const INSTRUMENT_SHORT: Record<string, string> = {
-  subject: "Lambda Calculus",
+  subject: "Discrete Math",
   general: "General Reasoning",
 };
 

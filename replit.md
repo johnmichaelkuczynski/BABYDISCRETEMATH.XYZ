@@ -1,30 +1,30 @@
-# 🔎 Baby Lambda Calculus
+# 🔎 Baby Discrete Math
 
-**A Friendly, One-Unit Intro to the Lambda Calculus That Teaches, Tutors, and Proofs Itself — for Curious Students and Adults Alike**
+**A Friendly, One-Unit Intro to Discrete Math That Teaches, Tutors, and Proofs Itself — for Curious Students and Adults Alike**
 
 ---
 
 ## 🧩 Overview
 
-Baby Lambda Calculus is a self-paced, single-user web course that delivers a friendly, plain-language introduction to the lambda calculus — the tiny language where everything is a function and computation is just substitution — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. No prior math or coding required; every idea is explained intuitively in plain words rather than heavy formulas.
+Baby Discrete Math is a self-paced, single-user web course that delivers a friendly, plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. No prior math or coding required; every idea is explained intuitively in plain words rather than heavy formulas.
 
-It turns one surprising idea — *what if everything, numbers, logic, even loops, were built out of nothing but functions* — into one product: read each lesson at the depth you want, ask a tutor scoped to the exact section you're on, drill questions whose difficulty adapts to you in real time, and submit homework, a unit test, and a final that are AI-graded with feedback and screened for AI-generated answers. The material is kept approachable and concrete — it shows how a function with a placeholder computes by substitution, how renaming variables avoids confusion, how to build numbers and booleans from pure functions, how recursion appears out of nowhere, and why this little language is exactly as powerful as any computer, from the identity function to the Y combinator.
+It turns one surprising idea — *that the math behind computers is really the math of distinct, countable things and the airtight reasoning that connects them* — into one product: read each lesson at the depth you want, ask a tutor scoped to the exact section you're on, drill questions whose difficulty adapts to you in real time, and submit homework, a unit test, and a final that are AI-graded with feedback and screened for AI-generated answers. The material is kept approachable and concrete — it shows how a logical "if-then" is false only when the 'if' is true and the 'then' is false, why a hundred examples still don't prove a rule, why {1,2,3} equals {3,2,1}, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, how 5 hours after 10 o'clock is 3, and how stepping onto the bottom rung and always reaching the next one lets you climb forever.
 
-The curriculum is organized into **one unit and 8 topics**: 1.1 what the lambda calculus is (everything is a function); 1.2 application and substitution (computation as rewriting); 1.3 bound and free (variables, renaming, and why it matters); 1.4 building numbers from nothing (Church numerals); 1.5 booleans, logic, and choice from pure functions; 1.6 recursion from nowhere (the Y combinator); 1.7 the punchline (lambda calculus equals Turing machines); and 1.8 from lambda to real languages (the capstone).
+The curriculum is organized into **one unit and 8 topics**: 1.1 what discrete math is (the math of distinct things); 1.2 logic (the machine code of reasoning); 1.3 proof (how you know something for certain); 1.4 sets, relations, and functions (the grammar of structure); 1.5 counting and the pigeonhole principle; 1.6 graphs (the hidden networks in everything); 1.7 modular arithmetic (clock math that secures the internet); and 1.8 recursion and induction (the capstone).
 
-Designed for **middle schoolers, curious adults wanting brief but meaningful exposure, instructors evaluating AI-taught coursework, and researchers studying AI academic integrity**, Baby Lambda Calculus pairs a real curriculum with two layers of AI-authorship detection — surfacing not just *whether* the writing looks AI-generated, but whether the *act of producing it* did.
+Designed for **middle schoolers, curious adults wanting brief but meaningful exposure, instructors evaluating AI-taught coursework, and researchers studying AI academic integrity**, Baby Discrete Math pairs a real curriculum with two layers of AI-authorship detection — surfacing not just *whether* the writing looks AI-generated, but whether the *act of producing it* did.
 
 ---
 
 ## 🧠 What It Does
 
-- **One-Unit Structured Curriculum** — A complete plain-language intro syllabus across 8 topics, from "what the lambda calculus is" to a real-world capstone. The unit ships with lessons, two homework sets, a timed unit test, and a cumulative final exam.
+- **One-Unit Structured Curriculum** — A complete plain-language intro syllabus across 8 topics, from "what discrete math is" to a real-world capstone. The unit ships with lessons, two homework sets, a timed unit test, and a cumulative final exam.
 - **Three-Depth Lessons** — Every lesson is available at **Short / Medium / Long** length, AI-rewritten while preserving the same examples and learning objectives. Skim the concept, expand it on demand, or read the deeper cut.
 - **Section-Scoped AI Tutor** — Ask a question about the paragraph you're reading and the answer streams back token-by-token, grounded in that exact lecture section. Suggested starter questions are pre-generated per lecture.
 - **Adaptive Topic Practice** — Generated problem sets that move difficulty up after a streak and down after a miss, with explanations on every answer. Per-session difficulty persists, so each drill picks up where the last one left off.
 - **AI-Graded Assignments** — Homework, the unit test, and the final are scored by an LLM grader that judges semantic equivalence to a model answer, returns per-problem correctness *plus* a written rationale, then rolls up to a percent score on the attempt.
 - **Two-Layer AI Detection on Every Submission** — Each submitted answer is screened by both a static text classifier (GPTZero) and a diachronic keystroke-pattern detector. Each verdict ships with a human-readable rationale.
-- **Diagnostic Reasoning Checks** — Two instruments (Lambda Calculus subject reasoning; and General Reasoning across analysis, inference, evaluation, deduction, and induction), each offered in three formats (multiple choice, hybrid, or written) and three lengths, at four points in the journey (before, one-third, two-thirds, and after the course). They are ungraded practice — takeable anytime, unlimited, with freshly generated questions every attempt — and never affect the grade (coursework is 100%).
+- **Diagnostic Reasoning Checks** — Two instruments (Discrete Math subject reasoning; and General Reasoning across analysis, inference, evaluation, deduction, and induction), each offered in three formats (multiple choice, hybrid, or written) and three lengths, at four points in the journey (before, one-third, two-thirds, and after the course). They are ungraded practice — takeable anytime, unlimited, with freshly generated questions every attempt — and never affect the grade (coursework is 100%).
 - **Live Analytics** — Dashboard KPIs (attempts, accuracy, streak), per-topic mastery percentages, and a recent-activity feed — so progress, weak spots, and momentum are all visible at a glance.
 - **Operator Diagnostics** — One-click self-tests (system health and synthetic-student end-to-end run) verify the entire stack — database, OpenAI integration, GPTZero, detection pipeline, and the practice/grade loop — before you trust a session.
 
@@ -48,7 +48,7 @@ Designed for **middle schoolers, curious adults wanting brief but meaningful exp
 
 ## 📊 Designed For
 
-- **Middle Schoolers & Curious Adults:** A complete, plain-language intro to the lambda calculus delivered with on-demand tutoring and adaptive practice — no instructor and no prior math or coding required.
+- **Middle Schoolers & Curious Adults:** A complete, plain-language intro to discrete math delivered with on-demand tutoring and adaptive practice — no instructor and no prior math or coding required.
 - **Instructors & Curriculum Designers:** A working reference for what AI-taught, AI-graded, AI-detection-screened coursework actually looks like end-to-end.
 - **Academic-Integrity Researchers:** A live testbed for layered AI-authorship detection that combines text-based classification with behavioral keystroke evidence.
 - **Product & Engineering Teams:** A reference implementation of contract-first full-stack architecture, streaming AI UX, and self-diagnostic operator tooling in a Replit pnpm monorepo.
@@ -57,11 +57,11 @@ Designed for **middle schoolers, curious adults wanting brief but meaningful exp
 
 ## 💡 Core Idea
 
-Baby Lambda Calculus reframes an AI-taught course as a *closed accountability loop*.
+Baby Discrete Math reframes an AI-taught course as a *closed accountability loop*.
 
 It doesn't just teach the material and grade the homework — it **teaches**, **tutors**, **drills**, **grades**, **detects misuse**, and **proves the whole pipeline still works** with a single click. The result is a self-paced course that students can actually trust to be fair, and that instructors can actually trust to be honest.
 
-**Baby Lambda Calculus — where the curriculum, the tutor, the grader, and the integrity check all live in one room.**
+**Baby Discrete Math — where the curriculum, the tutor, the grader, and the integrity check all live in one room.**
 
 ---
 

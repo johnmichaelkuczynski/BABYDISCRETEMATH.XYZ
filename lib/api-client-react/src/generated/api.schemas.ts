@@ -283,7 +283,7 @@ export interface PracticeSession {
 
 export interface NextProblemInput {
   /**
-     * Free-form user request, e.g. "give me harder probability problems"
+     * Free-form user request, e.g. "give me harder proof problems"
      * @nullable
      */
   request?: string | null;

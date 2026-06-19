@@ -39,7 +39,7 @@ export function Scene9() {
           transition={{ type: "spring", damping: 20, stiffness: 100 }}
         >
           <h1 className="text-[7vw] font-black text-white tracking-tighter leading-none mb-6">
-            Baby Lambda<br />Calculus
+            Baby Discrete<br />Math
           </h1>
         </motion.div>
 

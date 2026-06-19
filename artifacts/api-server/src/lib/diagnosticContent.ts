@@ -3,8 +3,8 @@
 //
 // Two instruments, each offered at FOUR time-points (phases) so a student can
 // gauge themselves before, during, and after the course:
-//   - subject  — Lambda Calculus subject-specific reasoning. Realistic short
-//     cases about the course material (the lambda calculus); the best-supported
+//   - subject  — Discrete Math subject-specific reasoning. Realistic short
+//     cases about the course material (discrete math); the best-supported
 //     answer is keyed first.
 //   - general  — General Reasoning. Genuine reasoning items spanning analysis,
 //     inference, evaluation, deduction, and induction (NOT a "docility"/agree-
@@ -88,25 +88,25 @@ const SUBJECT_SPECS: Record<Phase, GenSpec> = {
     level:
       "Intro level: answerable by a thoughtful newcomer reasoning carefully, BEFORE any lessons. Do not assume prior course knowledge or technical terms. No heavy formal derivations — reward plain-language reasoning.",
     topicFocus:
-      "What the lambda calculus is and how to think about it: that it is a tiny, complete model of computation built from nothing but functions (no numbers, no data, no commands), where the only moves are naming a variable, defining a function, and applying a function to an argument; that surprisingly everything else — numbers, true/false, data, and repetition — can be ENCODED as functions rather than built in; and that it needs no machine at all, just functions transforming functions, which is exactly why it underlies functional programming and the very definition of what is computable.",
+      "What discrete math is and how to think about it: that it is the mathematics of separate, distinct things — whole numbers, true/false statements, sets, networks — rather than the smooth, continuous quantities of calculus, where 'a little more' means jumping to the next whole thing; that its toolkit is logic, proof, sets/relations/functions, counting, graphs, modular arithmetic, and recursion/induction; and that because a computer is itself a discrete machine (distinct bits, one step at a time, no true infinities), discrete math is the natural language for what computers do, whether they are correct, and how long they take — rewarding careful reasoning and proof over formula-crunching.",
   },
   third: {
     level:
       "Early course level: covers roughly the first third of the unit. Plain language, short realistic cases, no heavy formal derivations.",
     topicFocus:
-      "Topics 1.1-1.3: what the lambda calculus is (a language of only functions, built from variables, abstraction λx. body, and application f x); application and substitution (computation is rewriting by beta reduction — when a function meets an argument you substitute the argument for the parameter — repeated until normal form, the answer, though some expressions never stop); and bound vs. free variables (a bound variable is the local name a function introduces and its name is arbitrary; a free variable comes from outside; careless substitution can cause variable capture, fixed by alpha renaming the bound variable).",
+      "Topics 1.1-1.3: what discrete math is (the math of distinct, countable things, the natural math of computers); logic (a statement is simply true or false; the connectives NOT/AND/OR — OR is inclusive — and if-then, which is false only when the 'if' is true but the 'then' is false; the quantifiers 'for all' and 'there exists,' where the negation of 'all' is 'some…not'); and proof (an airtight chain of reasoning giving certainty no pile of examples can — direct proof, proof by contradiction, and disproof by a single counterexample, since examples can never establish a 'for all' claim).",
   },
   twothirds: {
     level:
       "Mid course level: covers roughly the first two-thirds of the unit. Realistic short cases requiring a step of reasoning, no heavy formal derivations.",
     topicFocus:
-      "Topics 1.1-1.6: what the lambda calculus is, application and beta reduction, and bound vs. free variables, PLUS Church numerals (a number is encoded as how many times a function is applied: zero is λf. λx. x, two is λf. λx. f (f x); arithmetic becomes manipulating repetition — the deep lesson that data can be encoded as behavior), booleans and logic (TRUE picks the first of two options λa. λb. a and FALSE the second λa. λb. b, so if-then-else comes for free by applying the condition to the two branches, and AND/OR/NOT and pairs are built by wiring choosers), and the Y combinator (a nameless function can't call itself, so you pass the function to itself; the Y combinator automates this self-application — a fixed-point combinator — to give recursion with no names).",
+      "Topics 1.1-1.6: what discrete math is, logic, and proof, PLUS sets/relations/functions (a set is a collection of distinct things where order and duplicates don't matter; a relation is a set of linked pairs saying which things connect; a function is a relation assigning each input exactly one output), counting and the pigeonhole principle (the product rule multiplies independent choices and the sum rule adds non-overlapping ones; permutations count order-matters arrangements, combinations count order-doesn't selections; and more items than containers forces a shared container — guaranteeing collisions like unavoidable hash collisions), and graphs (dots/vertices joined by lines/edges, directed or weighted; paths, cycles, and connectedness; one dots-and-lines model fits road maps, social networks, and the web, so one algorithm like shortest path serves them all).",
   },
   after: {
     level:
       "End-of-course level: covers the whole unit. Integrative short cases that apply more than one idea, no heavy formal derivations.",
     topicFocus:
-      "The full unit, topics 1.1-1.8: what the lambda calculus is, beta reduction, bound/free variables, Church numerals, booleans and logic, and the Y combinator, PLUS the equivalence with Turing machines (two utterly different models — a tape-and-head machine and pure functions — can simulate each other, so they have exactly the same power; the Church–Turing thesis defines 'computable' as what they can do; and the halting problem is a provable limit, since no program can decide whether an arbitrary computation halts) and from lambda to real languages (real languages are the lambda calculus plus conveniences — names, loops, native numbers/booleans/types as sugar over substitution — with Lisp, ML, Haskell, and the first-class functions in mainstream languages descending directly from it; the deepest takeaway is computation as transformation of inputs through functions).",
+      "The full unit, topics 1.1-1.8: what discrete math is, logic, proof, sets/relations/functions, counting and the pigeonhole principle, and graphs, PLUS modular arithmetic (arithmetic that wraps around a modulus like a clock, working with remainders; the one-way property — easy forward like multiplying primes, infeasible to reverse like factoring — is what cryptosystems such as RSA use to secure the internet) and recursion and induction (recursion defines a thing by smaller copies plus a base case; induction proves a statement for all whole numbers via a base case and an inductive step, like climbing an infinite ladder; they are two sides of one idea, which is why recursive algorithms are proved correct by induction).",
   },
 };
 
@@ -152,7 +152,7 @@ const FORMAT_LABEL: Record<DiagFormat, string> = {
 function instructionsFor(instrument: Instrument, format: DiagFormat): string {
   const subject =
     instrument === "subject"
-      ? "Answer each question about the lambda calculus — these reward careful reasoning about realistic cases (no heavy formal derivations), not memorized facts"
+      ? "Answer each question about discrete math — these reward careful reasoning about realistic cases (no heavy formal derivations), not memorized facts"
       : "Answer each reasoning question — these measure how you think, not what you recall";
   const body =
     format === "mcq"
@@ -164,86 +164,86 @@ function instructionsFor(instrument: Instrument, format: DiagFormat): string {
 }
 
 // ===========================================================================
-// SUBJECT — Lambda Calculus blueprint cases (best answer keyed FIRST)
+// SUBJECT — Discrete Math blueprint cases (best answer keyed FIRST)
 // ===========================================================================
 
 const SUBJECT_BEFORE: DiagItem[] = [
   {
     prompt:
-      "A friend says, 'Computation needs a machine — chips, memory, and instructions being executed; you could never capture it with just math.' How would someone who understands what this course is about most likely respond?",
+      "A friend says, 'Discrete math is just calculus with smaller numbers — same kind of math.' How would someone who understands what this course is about most likely respond?",
     options: [
-      "Not really — the lambda calculus shows that all of computation can be captured by functions alone, with no machine at all, which is exactly why it's studied as the essence of computing",
-      "That's correct; without hardware there is no computation to speak of",
-      "The lambda calculus is just a slow way of describing a physical computer",
-      "It's true, because math can only describe numbers, never processes",
+      "Not really — discrete math studies separate, distinct things (whole numbers, statements, sets, networks) rather than the smooth, continuous quantities calculus is about, which is exactly why it's the natural math of computers",
+      "That's correct; the only real difference is that the numbers are smaller",
+      "Discrete math is just an easier version of calculus with the same goals",
+      "It's true, because all math is ultimately the same subject",
     ],
     modelAnswer:
-      "The lambda calculus is a complete model of computation built from nothing but functions — no machine, memory, or instructions — so computation turns out to be expressible as pure functions transforming functions, which is why it's taken as the essence of computing.",
+      "Discrete math is about distinct, countable things — not the smooth, continuous quantities of calculus — so it relies on careful reasoning rather than limits, and because computers are themselves discrete machines it is the natural math of computing.",
   },
   {
     prompt:
-      "In the lambda calculus 'everything is a function.' Which statement best captures what that means?",
+      "A computer stores information as distinct bits and takes one step at a time. Which statement best captures why this makes discrete math, not calculus, its natural language?",
     options: [
-      "There is only one kind of thing — functions that take functions and return functions — and things like numbers and true/false are built from them rather than given",
-      "It means every function must return a number as its result",
-      "It means the language has functions plus a few built-in numbers and commands",
-      "It means functions are just a convenient shortcut for writing arithmetic",
+      "Because a computer is itself a discrete machine — no true infinities or infinitely fine measurements — so the math describing what it does, whether it's correct, and how long it takes is the math of distinct things",
+      "Because calculus is too difficult for computers to run",
+      "Because computers only ever work with very small numbers",
+      "Because discrete math is faster to calculate than calculus",
     ],
     modelAnswer:
-      "The lambda calculus has only one kind of thing, the function; there are no built-in numbers, booleans, or data, so everything else must be encoded out of functions — that is what 'everything is a function' means.",
+      "Computers deal in distinct, countable steps and bits rather than continuous quantities, so questions about their behavior, correctness, and running time are discrete-math questions — which is why discrete math, not calculus, is computing's natural language.",
   },
   {
     prompt:
-      "Why would anyone study a 'language' stripped down to almost nothing — just variables, defining a function, and applying one?",
+      "Discrete math is often a student's first taste of 'real,' proof-based mathematics. Why is reasoning carefully — rather than just calculating — so central to it?",
     options: [
-      "Because a system small enough to reason about completely lets you prove what computation can and cannot do — and, surprisingly, it turns out to be as powerful as any computer",
-      "Because smaller languages are always easier to type quickly",
-      "Because it is only a historical curiosity with no real consequences",
-      "Because removing features is the only way to make a language run faster",
+      "Because its goal is to establish things with certainty and count possibilities without error, which rewards defining things precisely and proving why something must be true over crunching formulas",
+      "Because there are no numbers in discrete math at all",
+      "Because calculation is never useful in any part of mathematics",
+      "Because proofs are only there to make the subject harder",
     ],
     modelAnswer:
-      "Stripping computation down to its essence makes it possible to reason about it completely and prove what is and isn't computable; the striking payoff is that this tiny system is exactly as powerful as any computer.",
+      "Discrete math emphasizes establishing truths with certainty and counting possibilities exactly, so it rewards precise definitions and proof — careful reasoning about why something must hold — far more than memorized calculation.",
   },
 ];
 
 const SUBJECT_THIRD: DiagItem[] = [
   {
     prompt:
-      "The identity function λx. x is applied to some argument a. A student says the result is 'just λx. x again.' Using beta reduction, what's the best correction?",
+      "A menu says 'you may have soup or salad.' A student insists that in logic this rules out having both. Using what logic actually says about OR, what's the best correction?",
     options: [
-      "It reduces to a — beta reduction substitutes the argument for the parameter, and the identity function hands back whatever it is given",
-      "It stays λx. x, because applying a function never changes it",
-      "It reduces to x, the leftover parameter name",
-      "There is no answer, since the lambda calculus can't apply functions",
+      "In logic, OR is inclusive — it is true when at least one part is true, including the case where both are — so logically 'soup or salad' does not forbid having both",
+      "That's right; logic's OR always means exactly one, never both",
+      "Logic has no way to combine two statements with 'or'",
+      "It depends entirely on the menu, since logic doesn't define 'or'",
     ],
     modelAnswer:
-      "Applying λx. x to a triggers beta reduction: you substitute a for every x in the body, which is just x, so the whole thing becomes a — the identity function returns its input unchanged.",
+      "Logic's OR is inclusive: it is true whenever at least one part is true, and that includes both being true, so the logical reading of 'soup or salad' allows having both — unlike the casual 'one but not both.'",
     skillArea: "analysis",
   },
   {
     prompt:
-      "In the expression λx. (x + y), one variable is bound and the other is free. Which statement reasons about this correctly?",
+      "Consider the claim 'if it rains, the ground gets wet.' On a sunny day it doesn't rain. A student says the statement must be false that day. Which response reasons correctly?",
     options: [
-      "x is bound (the local name the function introduces, whose name is arbitrary) while y is free (it refers to something from outside the function)",
-      "Both x and y are bound, because they both appear inside the function",
-      "Both are free, since neither has a value assigned yet",
-      "y is bound and x is free, because y is written second",
+      "It is still true — an if-then is false only when the 'if' part is true but the 'then' part is false, so when it doesn't rain the promise was never tested and the statement holds",
+      "Yes, it is false, because the ground didn't get wet from rain",
+      "The statement is meaningless whenever it isn't raining",
+      "It is false, because both parts have to be true for an if-then to be true",
     ],
     modelAnswer:
-      "The x is bound — it is the placeholder the λ introduces and its name could be changed freely — while y is free, since nothing in the function introduces it, so it must refer to something in the surrounding context.",
+      "An implication makes a promise only about the case where the 'if' holds, so it is false in exactly one situation — 'if' true and 'then' false. On a dry day the 'if' is false, the promise is untested, so the statement counts as true.",
     skillArea: "inference",
   },
   {
     prompt:
-      "Someone says, 'Running a lambda calculus program must mean executing instructions on a processor, like any other program.' Given the course, why is that misleading?",
+      "Someone says, 'I checked a rule for the first hundred numbers and it always worked, so it's definitely true for all numbers.' Given the course, why is that reasoning flawed?",
     options: [
-      "Because there is no processor — computation is rewriting by beta reduction, substituting arguments into functions step by step until no function meets an argument (normal form)",
-      "Because lambda calculus programs can't actually compute anything at all",
-      "Because the lambda calculus runs only on specially built hardware",
-      "Because it always requires translating the program into numbers first",
+      "Because examples can only show a claim holds so far and never cover the infinitely many cases of a 'for all' statement — patterns can hold a long time then fail, so only a proof gives certainty",
+      "Because a hundred examples is simply too few; a thousand would settle it",
+      "Because checking examples is never useful in mathematics",
+      "Because the rule must be false if it needed checking at all",
     ],
     modelAnswer:
-      "The lambda calculus has no machine or instructions; 'running' an expression means repeatedly applying beta reduction — substituting each argument for its parameter — until the expression reaches normal form, which is the answer.",
+      "No finite number of examples can establish a 'for all' claim, since it covers infinitely many cases and patterns can fail late (like n² + n + 41 failing at 40); a proof is the only thing that establishes the claim for every case at once.",
     skillArea: "evaluation",
   },
 ];
@@ -251,41 +251,41 @@ const SUBJECT_THIRD: DiagItem[] = [
 const SUBJECT_TWOTHIRDS: DiagItem[] = [
   {
     prompt:
-      "The Church numeral for two is λf. λx. f (f x), and zero is λf. λx. x. A student asks what makes the first one 'two.' The best answer is:",
+      "A student says 'is a sibling of' is a function because it pairs people up. Using the idea that a function assigns each input exactly one output, what's the best correction?",
     options: [
-      "A Church numeral encodes a number as how many times it applies a function f to a starting value x — so 'two' applies f exactly twice, and zero applies it not at all",
-      "It is two because it has two λ symbols in front",
-      "It is two because the letter x appears twice in the expression",
-      "There's nothing numeric about it; the name 'two' is arbitrary",
+      "It's a relation but not a function — a person can have several siblings, so one input maps to many outputs, whereas a function must assign each input exactly one output",
+      "It is a function, because it connects pairs of people",
+      "It is neither a relation nor a function, since it involves people",
+      "It is a function only if everyone has exactly two siblings",
     ],
     modelAnswer:
-      "Church numerals represent a number by repetition: the numeral n applies a function f to x exactly n times, so λf. λx. f (f x) is 'two' because f is applied twice, while zero applies it zero times — number becomes a count of applications.",
+      "'Is a sibling of' is a relation (a set of linked pairs), but not a function: a single person can have multiple siblings, so one input has many outputs, violating the rule that a function gives each input exactly one output.",
     skillArea: "analysis",
   },
   {
     prompt:
-      "In the lambda calculus, TRUE is λa. λb. a and FALSE is λa. λb. b. Why does this make 'if-then-else' come almost for free?",
+      "A hash table maps a very large set of possible keys into a much smaller number of slots. A student hopes a clever enough design could avoid all collisions. Why does the pigeonhole principle say otherwise?",
     options: [
-      "Because a boolean is a chooser — give it the then-branch and the else-branch and TRUE returns the first while FALSE returns the second, which is exactly what if-then-else does",
-      "Because every boolean must first be converted into a Church numeral",
-      "Because TRUE and FALSE are really just the numbers one and zero in disguise",
-      "Because the lambda calculus has a built-in if statement these stand for",
+      "Because there are far more possible keys than slots, so by the pigeonhole principle at least two keys must land in the same slot — collisions are forced no matter how clever the design",
+      "Because hash functions are simply written badly",
+      "Because collisions only happen when the table is completely full",
+      "Because the pigeonhole principle applies only to physical pigeons",
     ],
     modelAnswer:
-      "Encoding TRUE and FALSE as functions that pick the first or second of two arguments means a condition is its own selector: applying it to the two branches yields the chosen one, so if-then-else is just applying the boolean to the branches.",
+      "With more items than containers, the pigeonhole principle guarantees some container holds two — so mapping many keys into fewer slots forces a collision. No hash design can avoid collisions entirely; it can only manage them.",
     skillArea: "inference",
   },
   {
     prompt:
-      "A factorial function has no name, so it can't call itself to recurse. A friend concludes recursion is impossible in the lambda calculus. Why is that wrong?",
+      "A road map, a friendship network, and the links between web pages seem to have nothing in common. Why can one graph algorithm, like shortest path, work on all three?",
     options: [
-      "Because you can pass the function to itself as an argument, and the Y combinator automates exactly this self-application to produce recursion with no names at all",
-      "Because the lambda calculus secretly allows you to name functions after all",
-      "Because recursion is replaced by simply writing the function out infinitely many times",
-      "Because only built-in loops, not functions, can repeat in the lambda calculus",
+      "Because each is just 'things and their connections' — dots joined by lines — and a graph captures only that bare structure, so an algorithm written for dots and lines works regardless of what they represent",
+      "Because all three are secretly the same physical system",
+      "Because a separate algorithm is actually needed for each one",
+      "Because graphs only work for road maps, not the other two",
     ],
     modelAnswer:
-      "A nameless function can still recurse by receiving itself as an argument; the Y combinator is a fixed-point combinator that wires up this self-application automatically, so recursion arises with no names — defeating the 'it can't call itself' objection.",
+      "A graph captures just the essence of things and their connections, discarding every other detail, so road maps, social networks, and the web are the same kind of object — and one dots-and-lines algorithm like shortest path serves them all.",
     skillArea: "evaluation",
   },
 ];
@@ -293,41 +293,41 @@ const SUBJECT_TWOTHIRDS: DiagItem[] = [
 const SUBJECT_AFTER: DiagItem[] = [
   {
     prompt:
-      "A friend reasons, 'The lambda calculus is so tiny — just functions — that it must be weaker than a real computer with memory and instructions.' Drawing on the unit, the strongest correction is:",
+      "A friend reasons, 'Modular arithmetic is just a trick for clocks and calendars — it can't have anything to do with serious things like internet security.' Drawing on the unit, the strongest correction is:",
     options: [
-      "Not so — the lambda calculus and Turing machines can each simulate the other, so despite looking utterly different they have exactly the same computational power",
-      "That's right; pure functions can never match a machine with memory",
-      "It's actually stronger, since it can solve problems no computer can",
-      "There's no way to compare two such different systems at all",
+      "Not so — modular arithmetic has a one-way property (easy forward like multiplying primes, infeasible to reverse like factoring), and cryptosystems such as RSA build internet security directly on that lopsidedness",
+      "That's right; clock math has no real-world importance",
+      "It's used in security only because it makes calculations faster",
+      "There's no connection between modular arithmetic and cryptography",
     ],
     modelAnswer:
-      "Two very different models — a tape-and-head Turing machine and pure functions — can each emulate the other, so they compute exactly the same things; the lambda calculus's small size doesn't limit its power, which is the heart of the Church–Turing thesis.",
+      "The same wrap-around arithmetic behind clocks has a crucial one-way property: some operations are easy to do but infeasible to undo (multiplying primes vs. factoring), and RSA-style cryptography turns exactly that into the security behind the browser padlock.",
     skillArea: "evaluation",
   },
   {
     prompt:
-      "A friend insists, 'With enough cleverness, someone could write one program that decides whether any given program will eventually halt.' Drawing on the unit, the strongest correction is:",
+      "A friend insists, 'Testing an algorithm on lots of inputs is just as good as proving it always works.' Drawing on the unit, the strongest correction is:",
     options: [
-      "Not possible — the halting problem is provably unsolvable, so no single program can decide for every possible program whether it halts",
-      "That's right; a sufficiently advanced program could always tell",
-      "It's only impossible because today's computers are too slow",
-      "Halting can be decided, but only for programs written in the lambda calculus",
+      "Not so — testing only shows the cases you checked, but a 'for all' guarantee covers infinitely many inputs, so only a proof (often by induction) can establish that the algorithm is always correct or always halts",
+      "That's right; enough tests are exactly equivalent to a proof",
+      "Proofs are unnecessary because computers don't make mistakes",
+      "Testing is pointless, so neither approach is any good",
     ],
     modelAnswer:
-      "Because the lambda calculus and Turing machines are equivalent, the halting problem applies to both: it is provably impossible to write a program that decides, for every program, whether it eventually halts — a fundamental limit, not a matter of cleverness or speed.",
+      "No amount of testing covers the infinitely many possible inputs, and patterns can fail beyond what you tried; a proof — frequently by induction over input size — is what establishes that an algorithm is correct or halts for every case.",
     skillArea: "inference",
   },
   {
     prompt:
-      "A friend says, 'The lambda calculus is just an abstract toy with no connection to the real languages programmers actually use.' Drawing on the unit, the strongest reply is:",
+      "A friend says, 'Discrete math is a grab-bag of unrelated topics — logic, sets, counting, graphs — with no thread connecting them.' Drawing on the unit, the strongest reply is:",
     options: [
-      "Real languages are essentially the lambda calculus plus conveniences — names, loops, native numbers and types as sugar over substitution — and Lisp, ML, Haskell, and first-class functions everywhere descend directly from it",
-      "She's right; modern languages owe nothing to the lambda calculus",
-      "It matters only to mathematicians, never to working programmers",
-      "The connection is purely coincidental and not worth studying",
+      "They connect tightly — logic grounds reasoning, proof turns it into certainty, sets/relations/functions give the grammar of structure, counting and graphs model possibilities and networks, and recursion/induction tie it together as the backbone of computing",
+      "She's right; the topics share nothing in common",
+      "They connect only by historical accident, not by ideas",
+      "Only logic matters; the rest are optional extras",
     ],
     modelAnswer:
-      "The lambda calculus is the backbone of real languages: features like names, loops, and built-in numbers are conveniences layered over function application and substitution, and whole families (Lisp, ML, Haskell) plus first-class functions in mainstream languages trace straight back to it.",
+      "The topics form one toolkit: logic and proof supply rigorous reasoning, sets/relations/functions describe structure, counting and graphs handle possibilities and networks, modular arithmetic secures communication, and recursion/induction unify defining and proving — together the mathematical backbone of computing.",
     skillArea: "evaluation",
   },
 ];
@@ -440,7 +440,7 @@ const BASE_CONTENT: BaseContent[] = PHASE_ORDER.flatMap((phase) => {
     {
       instrument: "subject" as const,
       phase,
-      baseTitle: `Lambda Calculus Check — ${PHASE_LABEL[phase]}`,
+      baseTitle: `Discrete Math Check — ${PHASE_LABEL[phase]}`,
       items: subjectItems[phase],
     },
     {

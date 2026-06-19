@@ -56,7 +56,7 @@ export function Scene1() {
           animate={phase >= 1 ? { y: 0, opacity: 1, filter: 'blur(0px)' } : { y: 40, opacity: 0, filter: 'blur(10px)' }}
           transition={{ type: 'spring', damping: 24, stiffness: 100 }}
         >
-          Baby Lambda<br />Calculus
+          Baby Discrete<br />Math
         </motion.h1>
         
         <motion.p 
@@ -65,7 +65,7 @@ export function Scene1() {
           animate={phase >= 2 ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          The tiny language of functions behind all of computing.<br />
+          The math of distinct things behind all of computing.<br />
           <span className="text-white/90">Taught, tutored, and graded entirely by AI.</span>
         </motion.p>
       </div>

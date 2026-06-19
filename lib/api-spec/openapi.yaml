@@ -877,7 +877,7 @@ components:
       properties:
         request:
           type: ["string", "null"]
-          description: Free-form user request, e.g. "give me harder beta reduction problems"
+          description: Free-form user request, e.g. "give me harder proof problems"
         topicId: { type: ["integer", "null"] }
 
     PracticeProblem:

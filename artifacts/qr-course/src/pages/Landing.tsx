@@ -38,19 +38,19 @@ const features = [
   {
     icon: BarChart3,
     title: "One Unit, 8 Topics",
-    body: "From what the lambda calculus is all the way to the real languages it grew into.",
+    body: "From what discrete math is all the way to recursion and induction.",
   },
 ];
 
 const topics = [
-  { n: "1.1", title: "What the lambda calculus is: everything is a function" },
-  { n: "1.2", title: "Application and substitution: computation as rewriting" },
-  { n: "1.3", title: "Bound and free: variables, renaming, and why it matters" },
-  { n: "1.4", title: "Building numbers from nothing: Church numerals" },
-  { n: "1.5", title: "Booleans, logic, and choice from pure functions" },
-  { n: "1.6", title: "Recursion from nowhere: the Y combinator" },
-  { n: "1.7", title: "The punchline: lambda calculus equals Turing machines" },
-  { n: "1.8", title: "From lambda to real languages (Capstone)" },
+  { n: "1.1", title: "What discrete math is: the math of distinct things" },
+  { n: "1.2", title: "Logic: the machine code of reasoning" },
+  { n: "1.3", title: "Proof: how you know something for certain" },
+  { n: "1.4", title: "Sets, relations, and functions: the grammar of structure" },
+  { n: "1.5", title: "Counting and the pigeonhole principle" },
+  { n: "1.6", title: "Graphs: the hidden networks in everything" },
+  { n: "1.7", title: "Modular arithmetic: clock math that secures the internet" },
+  { n: "1.8", title: "Recursion and induction (Capstone)" },
 ];
 
 export default function Landing() {
@@ -62,7 +62,7 @@ export default function Landing() {
             <Search className="w-4 h-4" />
           </div>
           <span className="font-serif font-semibold text-lg tracking-tight">
-            Baby Lambda Calculus
+            Baby Discrete Math
           </span>
         </div>
         <div className="flex items-center gap-2">
@@ -89,14 +89,14 @@ export default function Landing() {
         <section className="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium mb-6">
             <BarChart3 className="w-3.5 h-3.5" />
-            A friendly, one-unit intro to the lambda calculus
+            A friendly, one-unit intro to discrete math
           </div>
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary leading-tight mb-5">
-            The tiny language of functions behind all of computing. Let's understand it together.
+            The math of distinct things — the natural math of computers. Let's understand it together.
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
             A self-paced course that teaches, tutors, drills, and grades you —
-            the lambda calculus in plain language, no prior math or coding needed — every idea
+            discrete math in plain language, no prior math or coding needed — every idea
             is explained in plain words. Perfect for curious students and grown-ups alike.
           </p>
           <div className="flex items-center justify-center gap-3">
@@ -162,7 +162,7 @@ export default function Landing() {
       </main>
 
       <footer className="border-t border-border px-6 py-6 text-center text-sm text-muted-foreground">
-        Baby Lambda Calculus — where the curriculum, the tutor, the grader, and the
+        Baby Discrete Math — where the curriculum, the tutor, the grader, and the
         integrity check all live in one room.
       </footer>
     </div>

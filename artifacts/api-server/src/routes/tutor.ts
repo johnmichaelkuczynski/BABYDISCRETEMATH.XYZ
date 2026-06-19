@@ -22,11 +22,11 @@ router.get("/tutor/suggestions/:lectureId", async (req, res): Promise<void> => {
   }
 
   const SYSTEM_PROMPT =
-    'You are a rigorous introductory lambda-calculus tutor writing study questions. Reply as strict JSON of the form {"questions": string[]} with NO other keys.';
+    'You are a rigorous introductory discrete-math tutor writing study questions. Reply as strict JSON of the form {"questions": string[]} with NO other keys.';
   const buildUserPrompt = (extra: string) =>
     extra +
     `From the lecture below, write 6 starter questions that make the student APPLY the lecture's ideas to a CONCRETE EXAMPLE. Every question must hang on a specific case and ask the student to reason about that case.\n\n` +
-    `THE SINGLE MOST IMPORTANT RULE: every question must contain an explicit, concrete example — a specific relatable situation (e.g. "the identity function λx. x applied to some argument a, asking what it reduces to", "substituting a free variable y into λy. (x y) and the capture that goes wrong", "the Church numeral two, λf. λx. f (f x), and what makes it 'two'", "TRUE as λa. λb. a choosing the first of two options to give if-then-else", "a factorial that has no name to call itself and how the Y combinator fixes it"). Keep examples plain-language and intuitive — no heavy formal derivations, citations, or jargon. The question must ask the student to analyze, explain, judge, or predict something about THAT example. Reuse the lecture's own examples when it has them; otherwise invent a vivid, specific one.\n\n` +
+    `THE SINGLE MOST IMPORTANT RULE: every question must contain an explicit, concrete example — a specific relatable situation (e.g. "a menu saying 'soup or salad' and whether logic's inclusive OR forbids having both", "why 'if it rains, the ground is wet' is still true on a sunny day", "why 'is a sibling of' is a relation but not a function when one person has many siblings", "why any 13 people must include two who share a birth month", "why a road map, a friendship network, and the web are the same dots-and-lines model", "why 5 hours after 10 o'clock is 3 on a 12-hour clock"). Keep examples plain-language and intuitive — no heavy formal derivations, citations, or jargon. The question must ask the student to analyze, explain, judge, or predict something about THAT example. Reuse the lecture's own examples when it has them; otherwise invent a vivid, specific one.\n\n` +
     `ABSOLUTELY FORBIDDEN — never produce any of these:\n` +
     `- Questions that ask for a definition ("What is X?", "What does X mean?", "Define X").\n` +
     `- Questions that ask to distinguish or compare concepts in the abstract ("How do X and Y differ?", "What is the difference between X and Y?", "How does X relate to Y?").\n` +
@@ -34,10 +34,10 @@ router.get("/tutor/suggestions/:lectureId", async (req, res): Promise<void> => {
     `- Any question that could be answered without referring to a specific case.\n\n` +
     `If a question does not name a concrete example and ask the student to reason about it, REWRITE it until it does.\n\n` +
     `GOOD vs BAD:\n` +
-    `- BAD: "What's the difference between a bound and a free variable?"\n` +
-    `- GOOD: "In λx. (x + y), explain why substituting a free y in place of x would wrongly capture it, and how renaming the bound variable first avoids the problem."\n` +
-    `- BAD: "What is the Y combinator?"\n` +
-    `- GOOD: "A factorial function has no name to call itself — explain how passing the function to itself, as the Y combinator does, lets it recurse anyway."\n\n` +
+    `- BAD: "What's the difference between a relation and a function?"\n` +
+    `- GOOD: "Someone calls 'is a sibling of' a function because it pairs people up. Using a case where one person has several siblings, explain why it's a relation but not a function."\n` +
+    `- BAD: "What is the pigeonhole principle?"\n` +
+    `- GOOD: "Explain why, in any group of 13 people, at least two must share a birth month — and what makes that a certainty rather than just likely."\n\n` +
     `Cover several different major ideas from the reading across the 6 questions. One clear sentence each (roughly 12–28 words), in the student's own voice, no compound double-questions. Use $...$ for any inline math.\n\n` +
     `Return exactly 6 questions.\n\nLECTURE TITLE: ${lecture.title}\n\nLECTURE BODY:\n"""\n${lecture.body}\n"""`;
 
@@ -104,7 +104,7 @@ router.post("/tutor/ask", async (req, res): Promise<void> => {
   const { message, selectedLectureText } = parsed.data;
 
   const sys =
-    "You are an encouraging introductory lambda-calculus tutor. Explain step by step, use clear examples and relatable cases, and define key terms (e.g. functions, variables, abstraction, application, beta reduction, substitution, normal form, bound and free variables, variable capture, alpha renaming, Church numerals, booleans as choosers, if-then-else, the Y combinator, fixed points, the Church–Turing thesis, the halting problem) when they come up. Keep replies short (3-6 sentences) unless the student asks for more detail. Never just give the answer — guide them.";
+    "You are an encouraging introductory discrete-math tutor. Explain step by step, use clear examples and relatable cases, and define key terms (e.g. statements and truth values, truth tables, connectives — NOT, AND, inclusive OR, if-then implication, the quantifiers 'for all' and 'there exists', proof, direct proof, proof by contradiction, counterexamples, sets, relations, functions, counting, permutations and combinations, the pigeonhole principle, graphs with vertices and edges, paths and cycles, modular arithmetic, recursion, induction) when they come up. Keep replies short (3-6 sentences) unless the student asks for more detail. Never just give the answer — guide them.";
   const user = selectedLectureText
     ? `Context from the lecture the student is reading:\n"""\n${selectedLectureText}\n"""\n\nStudent question: ${message}`
     : message;
