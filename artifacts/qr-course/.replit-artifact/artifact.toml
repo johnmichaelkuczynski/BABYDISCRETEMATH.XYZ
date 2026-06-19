@@ -1,6 +1,6 @@
 kind = "web"
 previewPath = "/"
-title = "Baby Lambda Calculus"
+title = "Baby Discrete Math"
 version = "1.0.0"
 id = "artifacts/qr-course"
 router = "path"
