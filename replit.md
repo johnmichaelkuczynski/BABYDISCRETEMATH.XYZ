@@ -1,18 +1,18 @@
 # 🔎 Basic Discrete Math
 
-**A Friendly, One-Unit Intro to Discrete Math That Teaches, Tutors, and Proofs Itself — for Curious Students and Adults Alike**
+**A Friendly, One-Unit Intro to Discrete Math That Teaches, Tutors, and Proofs Itself — for Adults Entering a New Discipline**
 
 ---
 
 ## 🧩 Overview
 
-Basic Discrete Math is a self-paced, single-user web course that delivers a friendly, plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. No prior math or coding required; every idea is explained intuitively in plain words rather than heavy formulas.
+Basic Discrete Math is a self-paced, single-user web course that delivers a friendly, plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. Every idea is built up from first principles and explained in plain words rather than heavy formulas, so the subject stays approachable even if it is new to you.
 
 It turns one surprising idea — *that the math behind computers is really the math of distinct, countable things and the airtight reasoning that connects them* — into one product: read each lesson at the depth you want, ask a tutor scoped to the exact section you're on, drill questions whose difficulty adapts to you in real time, and submit homework, a unit test, and a final that are AI-graded with feedback and screened for AI-generated answers. The material is kept approachable and concrete — it shows how a logical "if-then" is false only when the 'if' is true and the 'then' is false, why a hundred examples still don't prove a rule, why {1,2,3} equals {3,2,1}, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, how 5 hours after 10 o'clock is 3, and how stepping onto the bottom rung and always reaching the next one lets you climb forever.
 
 The curriculum is organized into **one unit and 8 topics**: 1.1 what discrete math is (the math of distinct things); 1.2 logic (the machine code of reasoning); 1.3 proof (how you know something for certain); 1.4 sets, relations, and functions (the grammar of structure); 1.5 counting and the pigeonhole principle; 1.6 graphs (the hidden networks in everything); 1.7 modular arithmetic (clock math that secures the internet); and 1.8 recursion and induction (the capstone).
 
-Designed for **middle schoolers, curious adults wanting brief but meaningful exposure, instructors evaluating AI-taught coursework, and researchers studying AI academic integrity**, Basic Discrete Math pairs a real curriculum with two layers of AI-authorship detection — surfacing not just *whether* the writing looks AI-generated, but whether the *act of producing it* did.
+Designed for **adults approaching discrete math for the first time — graduate students, researchers, and working professionals entering a new field — instructors evaluating AI-taught coursework, and researchers studying AI academic integrity**, Basic Discrete Math pairs a real curriculum with two layers of AI-authorship detection — surfacing not just *whether* the writing looks AI-generated, but whether the *act of producing it* did.
 
 ---
 
@@ -48,7 +48,7 @@ Designed for **middle schoolers, curious adults wanting brief but meaningful exp
 
 ## 📊 Designed For
 
-- **Middle Schoolers & Curious Adults:** A complete, plain-language intro to discrete math delivered with on-demand tutoring and adaptive practice — no instructor and no prior math or coding required.
+- **Adults Entering a New Field:** A complete, plain-language introduction to discrete math delivered with on-demand tutoring and adaptive practice — self-paced, with no instructor required.
 - **Instructors & Curriculum Designers:** A working reference for what AI-taught, AI-graded, AI-detection-screened coursework actually looks like end-to-end.
 - **Academic-Integrity Researchers:** A live testbed for layered AI-authorship detection that combines text-based classification with behavioral keystroke evidence.
 - **Product & Engineering Teams:** A reference implementation of contract-first full-stack architecture, streaming AI UX, and self-diagnostic operator tooling in a Replit pnpm monorepo.

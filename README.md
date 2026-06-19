@@ -1,8 +1,8 @@
 # 🔎 Basic Discrete Math
 
-**A friendly, one-unit intro to discrete math that teaches, tutors, drills, and grades itself — for curious students and adults alike.**
+**A friendly, one-unit intro to discrete math that teaches, tutors, drills, and grades itself — for adults entering a new discipline.**
 
-Basic Discrete Math is a self-paced, single-user web course that delivers a plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. No prior math or coding required. Every idea is explained intuitively in plain words rather than heavy formulas: why an "if-then" is false only when the 'if' is true and the 'then' is false, why a hundred examples still don't prove a rule, why {1,2,3} equals {3,2,1}, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, and how stepping onto the bottom rung and always reaching the next one lets you climb forever.
+Basic Discrete Math is a self-paced, single-user web course that delivers a plain-language introduction to discrete mathematics — the math of separate, distinct things (whole numbers, statements, sets, networks), the natural math of computers — taught, tutored, drilled, and graded entirely by AI, with built-in academic-integrity enforcement. Every idea is built up from first principles and explained in plain words rather than heavy formulas: why an "if-then" is false only when the 'if' is true and the 'then' is false, why a hundred examples still don't prove a rule, why {1,2,3} equals {3,2,1}, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, and how stepping onto the bottom rung and always reaching the next one lets you climb forever.
 
 ---
 
@@ -95,7 +95,7 @@ Open the **Diagnostics** page in the app (or hit the API directly) to run:
 
 ## 📚 Who it's for
 
-- **Middle schoolers & curious adults** — a complete, plain-language intro to discrete math with on-demand tutoring and adaptive practice.
+- **Adults entering a new field** — a complete, plain-language intro to discrete math with on-demand tutoring and adaptive practice, for graduate students, researchers, and professionals approaching the subject for the first time.
 - **Instructors & curriculum designers** — a working reference for AI-taught, AI-graded, AI-detection-screened coursework.
 - **Academic-integrity researchers** — a live testbed for layered AI-authorship detection (text classification + keystroke behavior).
 - **Product & engineering teams** — a reference implementation of contract-first full-stack architecture, streaming AI UX, and self-diagnostic tooling.

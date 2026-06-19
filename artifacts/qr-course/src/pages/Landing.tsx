@@ -95,9 +95,9 @@ export default function Landing() {
             The math of distinct things — the natural math of computers. Let's understand it together.
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            A self-paced course that teaches, tutors, drills, and grades you —
-            discrete math in plain language, no prior math or coding needed — every idea
-            is explained in plain words. Perfect for curious students and grown-ups alike.
+            A self-paced course that teaches, tutors, drills, and grades you — the
+            foundations of discrete math, built up from first principles in clear,
+            plain language. Made for adults approaching the subject for the first time.
           </p>
           <div className="flex items-center justify-center gap-3">
             <Link href="/sign-up">

@@ -14,7 +14,7 @@ import { logger } from "./logger";
 // the value stored in seed_meta; a mismatch forces a full re-seed, so content
 // edits self-heal in every environment (including a republished production)
 // without a manual database wipe.
-const SEED_CONTENT_VERSION = "2026-06-19-basic-discrete-math-v1";
+const SEED_CONTENT_VERSION = "2026-06-19-basic-discrete-math-v2";
 
 type SeedTopic = {
   slug: string;
@@ -171,7 +171,7 @@ Now the deceptively tiny idea: if you put more pigeons than pigeonholes, **some 
 
 ## Why a small idea has big consequences
 
-The pigeonhole principle matters because it converts a simple count into a *guarantee*. Many deep results — in computer science, number theory, and beyond — boil down to setting up the right "pigeons" and "holes" so that a collision is forced. It explains why **lossless compression can't shrink every file** (there are more possible files than shorter ones, so some must stay the same size or grow), and why **hash collisions are unavoidable** when you map many keys into fewer slots. A principle a child can understand turns out to draw hard limits on what algorithms can do.
+The pigeonhole principle matters because it converts a simple count into a *guarantee*. Many deep results — in computer science, number theory, and beyond — boil down to setting up the right "pigeons" and "holes" so that a collision is forced. It explains why **lossless compression can't shrink every file** (there are more possible files than shorter ones, so some must stay the same size or grow), and why **hash collisions are unavoidable** when you map many keys into fewer slots. A principle simple enough to state in one sentence turns out to draw hard limits on what algorithms can do.
 
 ## In the real world
 

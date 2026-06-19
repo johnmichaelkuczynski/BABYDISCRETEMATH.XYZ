@@ -4,13 +4,13 @@
 
 1. Basic Discrete Math — an AI course that teaches, tutors & grades itself
 2. I built an AI-powered course on discrete math (it even catches AI cheating)
-3. The Math of Distinct Things — a friendly discrete-math course for curious students & adults
+3. The Math of Distinct Things — a complete discrete-math course taught, tutored & graded by AI
 
 ---
 
 ## 📝 Description (paste into YouTube)
 
-Meet **Basic Discrete Math** — a friendly, one-unit intro to discrete math that teaches, tutors, drills, and grades itself, entirely with AI. No prior math, no coding, no jargon. Just plain-language lessons about the math of separate, distinct things — whole numbers, statements, sets, and networks — the natural math of computers: how logic's "if-then" works, why a hundred examples still don't prove a rule, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, and how induction lets you climb an infinite ladder, explained intuitively from start to finish.
+Meet **Basic Discrete Math** — a complete, one-unit course in discrete mathematics that teaches, tutors, drills, and grades itself, entirely with AI. Across eight topics it covers the foundations of the field: logic and the rules of valid reasoning, proof, sets, relations and functions, counting and the pigeonhole principle, graph theory, modular arithmetic, and recursion and induction — the math of separate, distinct things (whole numbers, statements, sets, and networks) that underpins all of computing. Every topic is built up from first principles in clear, precise language: how logic's "if-then" really works, why a hundred examples still don't prove a rule, why 13 people must share a birth month, how a road map and a friendship network are the same dots-and-lines model, and how induction lets you climb an infinite ladder.
 
 In this video you'll see the whole course in action:
 
@@ -21,9 +21,9 @@ In this video you'll see the whole course in action:
 📝 AI-graded homework, a unit test, and a final — each with real written feedback
 🛡️ Two-layer AI-authorship detection on every answer you submit (a text classifier AND a keystroke-pattern detector)
 
-Perfect for curious adults wanting a quick but meaningful intro to discrete math, students exploring logic, sets, and counting, instructors exploring AI-taught coursework, and academic-integrity researchers.
+Built for adults approaching discrete math for the first time — graduate students, researchers, instructors, and working professionals entering a new field — as well as academic-integrity researchers studying AI-taught, AI-graded coursework.
 
-Start learning — no instructor, no textbook, no prior math.
+A full curriculum, a section-scoped tutor, and an AI grader — all in one place. Start learning.
 
 ---
 
