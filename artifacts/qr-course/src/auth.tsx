@@ -1,4 +1,7 @@
+import { type ComponentType } from "react";
+import { Redirect } from "wouter";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Landing from "@/pages/Landing";
 
 export interface AuthUser {
   id: number;
@@ -37,5 +40,21 @@ export function useLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
     qc.clear();
     window.location.href = "/";
+  };
+}
+
+export function HomeRedirect() {
+  const { isAuthenticated, isLoading } = useAuth();
+  if (isLoading) return null;
+  if (isAuthenticated) return <Redirect to="/dashboard" />;
+  return <Landing />;
+}
+
+export function protectedComponent(Component: ComponentType<any>) {
+  return function Guarded(props: any) {
+    const { isAuthenticated, isLoading } = useAuth();
+    if (isLoading) return null;
+    if (!isAuthenticated) return <Redirect to="/" />;
+    return <Component {...props} />;
   };
 }

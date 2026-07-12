@@ -1,9 +1,7 @@
-import { type ComponentType } from "react";
 import {
   Switch,
   Route,
   Router as WouterRouter,
-  Redirect,
 } from "wouter";
 import {
   QueryClient,
@@ -13,7 +11,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 
-import Landing from "@/pages/Landing";
 import Dashboard from "@/pages/Dashboard";
 import Assignments from "@/pages/Assignments";
 import Analytics from "@/pages/Analytics";
@@ -27,27 +24,10 @@ import Reasoning from "@/pages/Reasoning";
 import ReasoningRunner from "@/pages/ReasoningRunner";
 import Grades from "@/pages/Grades";
 import AdminMode from "@/pages/AdminMode";
-import { useAuth } from "@/hooks/useAuth";
+import { HomeRedirect, protectedComponent } from "@/auth";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-
 const queryClient = new QueryClient();
-
-function HomeRedirect() {
-  const { isAuthenticated, isLoading } = useAuth();
-  if (isLoading) return null;
-  if (isAuthenticated) return <Redirect to="/dashboard" />;
-  return <Landing />;
-}
-
-function protectedComponent(Component: ComponentType<any>) {
-  return function Guarded(props: any) {
-    const { isAuthenticated, isLoading } = useAuth();
-    if (isLoading) return null;
-    if (!isAuthenticated) return <Redirect to="/" />;
-    return <Component {...props} />;
-  };
-}
 
 function Router() {
   return (
