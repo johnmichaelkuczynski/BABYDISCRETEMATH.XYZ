@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { LayoutDashboard, PenTool, BarChart3, Activity, RotateCcw, Sparkles, LogOut, Scale, GraduationCap, ShieldCheck, Search } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useClerk, useUser } from "@clerk/react";
+import { useAuth, useLogout } from "@/hooks/useAuth";
 import { useAdminMode } from "@/lib/adminMode";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -67,8 +67,8 @@ function TopBar() {
   const active = location.startsWith("/diagnostics");
   const [adminMode, setAdminMode] = useAdminMode();
   const qc = useQueryClient();
-  const { signOut } = useClerk();
-  const { user } = useUser();
+  const logout = useLogout();
+  const { user } = useAuth();
   const [resetting, setResetting] = useState(false);
   const [expanding, setExpanding] = useState(false);
   const [expandProgress, setExpandProgress] = useState<string | null>(null);
@@ -192,14 +192,14 @@ function TopBar() {
       {user && (
         <span
           className="hidden sm:inline text-sm text-muted-foreground max-w-[12rem] truncate"
-          title={user.primaryEmailAddress?.emailAddress ?? undefined}
+          title={user.email ?? undefined}
           data-testid="text-user-email"
         >
-          {user.primaryEmailAddress?.emailAddress ?? user.firstName ?? "Account"}
+          {user.email ?? user.displayName ?? "Account"}
         </span>
       )}
       <button
-        onClick={() => signOut({ redirectUrl: basePath || "/" })}
+        onClick={logout}
         className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium border border-border hover:bg-secondary"
         data-testid="button-sign-out"
         title="Sign out"
