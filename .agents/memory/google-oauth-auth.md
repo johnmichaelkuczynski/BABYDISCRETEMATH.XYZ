@@ -9,50 +9,42 @@ Clerk has been fully removed. Auth is now Passport.js + `passport-google-oauth20
 
 ## Architecture
 
-- **Backend** (`artifacts/api-server/src/auth.ts`): canonical implementation; `setupAuth(app)` called in `app.ts` before route registration. Routes: `/auth/google` (login), `/auth/google/callback` (OAuth callback), `/api/auth/google` + `/api/auth/google/callback` (aliases), `/api/auth/user` (session check), `/api/auth/logout` (POST).
+- **Backend** (`artifacts/api-server/src/auth.ts`): canonical implementation; `setupAuth(app)` is `async` and called with `await` in `app.ts` before route registration. Routes: `/auth/google` (login), `/auth/google/callback` (OAuth callback), `/api/auth/google` + `/api/auth/google/callback` (aliases), `/api/auth/user` (session check), `/api/auth/logout` (POST).
 - **Storage** (`artifacts/api-server/src/lib/storage.ts`): Drizzle-based user/visit CRUD. Methods: `getUserById`, `getUserByGoogleId`, `getUserByEmail`, `createUserWithGoogle`, `updateUserGoogle`, `recordVisit`, `getVisits`, `getVisitTimestampsSince`.
-- **DB schema** (`lib/db/src/schema/auth.ts`): `usersTable` (id, username, googleId, email, displayName, createdAt) + `visitsTable` (id, userId, email, visitedAt). Sessions stored in `user_sessions` (auto-created by connect-pg-simple).
-- **Frontend hook** (`artifacts/qr-course/src/hooks/useAuth.ts`): `useAuth()` calls `/api/auth/user`; `useLogout()` POSTs to `/api/auth/logout` and clears React Query cache + redirects to `/`.
-- **Frontend App** (`artifacts/qr-course/src/App.tsx`): no Clerk; `protectedComponent` HOC and `HomeRedirect` both call `useAuth()` and return `null` while loading.
-- **Layout** (`artifacts/qr-course/src/components/layout/Layout.tsx`): uses `useAuth()` for user display name/email and `useLogout()` for the Sign out button.
+- **DB schema** (`lib/db/src/schema/auth.ts`): `usersTable` (id, username, googleId, email, displayName, createdAt) + `visitsTable` (id, userId, email, visitedAt). Sessions stored in `user_sessions` — created via inline SQL at boot (see gotcha below).
+- **Frontend** (`artifacts/qr-course/src/auth.tsx`): single file containing `AuthUser` type, `useAuth()` hook, `useLogout()` hook, `HomeRedirect` component, and `protectedComponent()` HOC. Both `App.tsx` and `Layout.tsx` import from `@/auth`.
+
+## Critical gotcha — connect-pg-simple + esbuild bundle
+
+**Do NOT use `createTableIfMissing: true`** in the PgSession constructor. esbuild bundles everything into `dist/index.mjs`, and `connect-pg-simple` resolves `table.sql` via `__dirname` — which in the bundle points at `dist/`, not the package directory. The session store fails silently, sessions are never saved, and login produces an infinite redirect loop (authenticate → callback → unauthenticated → login → loop).
+
+**Fix:** `createTableIfMissing: false` plus an explicit `await pool.query(CREATE TABLE IF NOT EXISTS ...)` before the store is created. `setupAuth` must be `async` and called with `await` in `app.ts`.
 
 ## Routing gotcha — /auth must be proxied to API server
 
-The Replit proxy routes by path prefix. The callback is at `/auth/google/callback` (not `/api/...`). The API server's `artifact.toml` `paths` must include both `/api` AND `/auth`:
+The OAuth callback is at `/auth/google/callback` (not `/api/...`). The API server's `artifact.toml` `paths` must include both `/api` AND `/auth`:
 
 ```toml
 [[services]]
 paths = ["/api", "/auth"]
 ```
 
-Without `/auth`, the OAuth callback hits the frontend (which returns `index.html`), breaking the login flow.
-
 ## Env vars required
 
-- `GOOGLE_CLIENT_ID` (or `GOOGLE_LOGIN_CLIENT_ID`) — Google Cloud OAuth client ID
-- `GOOGLE_CLIENT_SECRET` (or `GOOGLE_LOGIN_CLIENT_SECRET`) — Google Cloud OAuth client secret
-- `SESSION_SECRET` — required in production; falls back to a dev string in development
+- `GOOGLE_CLIENT_ID` (also reads `GOOGLE_LOGIN_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_ID`)
+- `GOOGLE_CLIENT_SECRET` (also reads `GOOGLE_LOGIN_CLIENT_SECRET`, `GOOGLE_OAUTH_CLIENT_SECRET`)
+- `SESSION_SECRET` — required in production; dev falls back to `basic-discrete-math-secret-key`
 - `DATABASE_URL` — used by both Drizzle (course data) and the session pool (pg.Pool directly)
 
-## Google Cloud Console setup (per environment)
+## Google Cloud Console — registered callback URIs
 
-Register these redirect URIs in the OAuth client:
 - Dev: `https://<REPLIT_DEV_DOMAIN>/auth/google/callback`
-- Production: `https://<REPLIT_DOMAINS>/auth/google/callback`
-
-The server logs the exact callback URL at startup: `Google OAuth configured. Callback URL: ...`
+- Production: `https://baby-discrete-math.replit.app/auth/google/callback`
 
 ## Express 5 / TypeScript gotcha
 
-`RequestHandler` in `@types/express@5` is strict about return types. A callback that `return`s in one branch must also return consistently or TS7030 fires. Fix: use `res.status(N).json(...); return;` (two statements) instead of `return res.status(N).json(...)` in Express 5 handlers.
+`return next()` and `return res.json(...)` inside `RequestHandler` functions cause TS7030 in Express 5's strict types. Use `next(); return;` and `res.json(...); return;` (two statements) instead.
 
-**Why:** `json()` returns `Response` (non-void); if one branch returns it and another doesn't, TS infers a mixed return type and flags TS7030.
+## Clerk integration warning
 
-## What was removed
-
-- `@clerk/express`, `@clerk/shared` from api-server
-- `@clerk/react`, `@clerk/themes` from qr-course
-- `clerkProxyMiddleware` (no longer imported in app.ts; file kept but unused)
-- Clerk env vars (`CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`, `VITE_CLERK_PUBLISHABLE_KEY`) — can be deleted after confirming login works
-- `@layer clerk` in `index.css` and `@import "@clerk/themes/shadcn.css"`
-- `/sign-in` and `/sign-up` routes from wouter Router
+Replit's Clerk integration auto-reinjects `CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`, `VITE_CLERK_PUBLISHABLE_KEY` as long as the integration remains connected. Disconnect it from Replit → Integrations panel, then delete the secrets manually. Any file referencing `CLERK_SECRET_KEY` (even dead code) will cause the scanner to keep the integration alive.
