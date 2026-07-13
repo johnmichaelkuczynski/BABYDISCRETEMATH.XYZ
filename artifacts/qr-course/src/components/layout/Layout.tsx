@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, PenTool, BarChart3, Activity, RotateCcw, Sparkles, LogOut, Scale, GraduationCap, ShieldCheck, Search } from "lucide-react";
+import { LayoutDashboard, PenTool, BarChart3, Activity, RotateCcw, Sparkles, LogOut, Scale, GraduationCap, ShieldCheck, Search, Users } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useAuth, useLogout } from "@/auth";
+import { useAuth, useLogout, useIsAdmin } from "@/auth";
 import { useAdminMode } from "@/lib/adminMode";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -10,6 +10,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 export function Sidebar() {
   const [location] = useLocation();
   const [adminMode] = useAdminMode();
+  const { isAdmin } = useIsAdmin();
 
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -19,6 +20,9 @@ export function Sidebar() {
     { href: "/analytics", label: "Analytics", icon: BarChart3 },
     ...(adminMode
       ? [{ href: "/admin", label: "Administrator", icon: ShieldCheck }]
+      : []),
+    ...(isAdmin
+      ? [{ href: "/administrative", label: "Administrative", icon: Users }]
       : []),
   ];
 

@@ -24,6 +24,7 @@ import Reasoning from "@/pages/Reasoning";
 import ReasoningRunner from "@/pages/ReasoningRunner";
 import Grades from "@/pages/Grades";
 import AdminMode from "@/pages/AdminMode";
+import Administrative from "@/pages/Administrative";
 import { HomeRedirect, protectedComponent } from "@/auth";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -51,6 +52,7 @@ function Router() {
       />
       <Route path="/grades" component={protectedComponent(Grades)} />
       <Route path="/admin" component={protectedComponent(AdminMode)} />
+      <Route path="/administrative" component={protectedComponent(Administrative)} />
       <Route path="/diagnostics" component={protectedComponent(Diagnostics)} />
       <Route
         path="/weeks/:weekNumber"

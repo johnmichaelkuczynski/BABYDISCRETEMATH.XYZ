@@ -50,6 +50,16 @@ export function HomeRedirect() {
   return <Landing />;
 }
 
+const ADMIN_EMAIL = "johnmichaelkuczynski@gmail.com";
+
+export function useIsAdmin() {
+  const { user, isLoading } = useAuth();
+  return {
+    isAdmin: user?.email?.toLowerCase() === ADMIN_EMAIL,
+    isLoading,
+  };
+}
+
 export function protectedComponent(Component: ComponentType<any>) {
   return function Guarded(props: any) {
     const { isAuthenticated, isLoading } = useAuth();
