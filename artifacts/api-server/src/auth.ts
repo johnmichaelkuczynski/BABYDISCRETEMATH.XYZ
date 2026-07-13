@@ -47,35 +47,37 @@ export function setupAuth(app: Express) {
   }
 
   // Trust proxy for production (behind Replit's proxy)
-  app.set('trust proxy', 1);
+  app.set("trust proxy", 1);
 
   // Database-backed session store
   const PgSession = connectPgSimple(session);
   const pool = new pg.Pool({
     connectionString: process.env.NEON_DATABASE_URL || process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
+    ssl: { rejectUnauthorized: false },
   });
 
-  pool.on('error', (err) => {
-    console.error('Session pool error:', err);
+  pool.on("error", (err) => {
+    console.error("Session pool error:", err);
   });
 
-  pool.on('connect', () => {
-    console.log('Session pool connected to database');
+  pool.on("connect", () => {
+    console.log("Session pool connected to database");
   });
 
   // Session setup with database storage
   const pgStore = new PgSession({
     pool,
-    tableName: 'user_sessions',
+    tableName: "user_sessions",
     createTableIfMissing: true,
-    errorLog: console.error.bind(console, 'Session store error:'),
+    errorLog: console.error.bind(console, "Session store error:"),
   });
 
-  const isProduction = process.env.NODE_ENV === 'production';
+  const isProduction = process.env.NODE_ENV === "production";
 
   if (isProduction && !process.env.SESSION_SECRET) {
-    throw new Error("SESSION_SECRET environment variable is required in production");
+    throw new Error(
+      "SESSION_SECRET environment variable is required in production"
+    );
   }
 
   app.use(
@@ -87,13 +89,15 @@ export function setupAuth(app: Express) {
       cookie: {
         secure: isProduction || !!process.env.REPLIT_DEV_DOMAIN,
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: "lax",
         maxAge: 30 * 24 * 60 * 60 * 1000,
       },
     })
   );
 
-  console.log(`Session configured. Secure cookies: ${isProduction || !!process.env.REPLIT_DEV_DOMAIN}`);
+  console.log(
+    `Session configured. Secure cookies: ${isProduction || !!process.env.REPLIT_DEV_DOMAIN}`
+  );
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -111,7 +115,7 @@ export function setupAuth(app: Express) {
     }
   });
 
-  // --- Google OAuth 2.0 (optional login: the app itself is fully open) ---
+  // --- Google OAuth 2.0 ---
   if (googleEnabled) {
     // Callback path is /auth/google/callback to match the redirect URIs
     // registered in the owner's Google Cloud Console OAuth client.
@@ -122,7 +126,8 @@ export function setupAuth(app: Express) {
         const prodDomain = (process.env.REPLIT_DOMAINS || "")
           .split(",")[0]
           ?.trim();
-        return `https://${prodDomain || "localhost:5000"}${CALLBACK_PATH}`;
+        // CHANGED: fallback domain updated from textsurgeonplus.xyz to this app's production domain
+        return `https://${prodDomain || "baby-discrete-math.replit.app"}${CALLBACK_PATH}`;
       }
       if (process.env.REPLIT_DEV_DOMAIN) {
         return `https://${process.env.REPLIT_DEV_DOMAIN}${CALLBACK_PATH}`;
@@ -139,6 +144,8 @@ export function setupAuth(app: Express) {
       [
         ...(process.env.REPLIT_DOMAINS || "").split(",").map((d) => d.trim()),
         process.env.REPLIT_DEV_DOMAIN || "",
+        // CHANGED: replaced textsurgeonplus.xyz / www.textsurgeonplus.xyz with this app's production domain
+        "baby-discrete-math.replit.app",
         "localhost:5000",
       ]
         .filter(Boolean)
@@ -181,14 +188,17 @@ export function setupAuth(app: Express) {
               }
 
               if (!user) {
-                const username = email?.split("@")[0] || `user_${googleId.substring(0, 8)}`;
+                const username =
+                  email?.split("@")[0] || `user_${googleId.substring(0, 8)}`;
                 user = await storage.createUserWithGoogle({
                   username,
                   googleId,
                   email,
                   displayName,
                 });
-                console.log(`Google OAuth: Created new user ${user.id} (${user.username})`);
+                console.log(
+                  `Google OAuth: Created new user ${user.id} (${user.username})`
+                );
               } else {
                 user = await storage.updateUserGoogle(user.id, {
                   googleId,
@@ -281,6 +291,7 @@ export function setupAuth(app: Express) {
     }
   });
 
+  // FIXED (Express 5 TS7030): split return + res.json into two statements
   app.post("/api/auth/logout", (req, res) => {
     req.logout((err) => {
       if (err) {
@@ -316,11 +327,19 @@ export function setupAuth(app: Express) {
       };
 
       // Build bucketed series for graphs
-      const buildSeries = (start: number, bucketMs: number, buckets: number, labelFn: (d: Date) => string) => {
+      const buildSeries = (
+        start: number,
+        bucketMs: number,
+        buckets: number,
+        labelFn: (d: Date) => string
+      ) => {
         const counts = new Array(buckets).fill(0);
         for (const t of times) {
           if (t >= start) {
-            const idx = Math.min(Math.floor((t - start) / bucketMs), buckets - 1);
+            const idx = Math.min(
+              Math.floor((t - start) / bucketMs),
+              buckets - 1
+            );
             counts[idx]++;
           }
         }
@@ -333,18 +352,40 @@ export function setupAuth(app: Express) {
       const HOUR = 60 * 60 * 1000;
       const DAY = 24 * HOUR;
       const series = {
-        last24Hours: buildSeries(now - 24 * HOUR, HOUR, 24, (d) =>
-          d.toLocaleTimeString("en-US", { hour: "numeric", hour12: true })),
-        lastMonth: buildSeries(now - 30 * DAY, DAY, 30, (d) =>
-          d.toLocaleDateString("en-US", { month: "short", day: "numeric" })),
-        lastYear: buildSeries(now - 365 * DAY, 365 / 12 * DAY, 12, (d) =>
-          d.toLocaleDateString("en-US", { month: "short", year: "2-digit" })),
+        last24Hours: buildSeries(
+          now - 24 * HOUR,
+          HOUR,
+          24,
+          (d) => d.toLocaleTimeString("en-US", { hour: "numeric", hour12: true })
+        ),
+        lastMonth: buildSeries(
+          now - 30 * DAY,
+          DAY,
+          30,
+          (d) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+        ),
+        lastYear: buildSeries(
+          now - 365 * DAY,
+          (365 / 12) * DAY,
+          12,
+          (d) =>
+            d.toLocaleDateString("en-US", { month: "short", year: "2-digit" })
+        ),
         allTime: (() => {
           const earliest = times.length ? Math.min(...times) : now;
           const span = Math.max(now - earliest, DAY);
           const buckets = Math.min(24, Math.max(6, Math.ceil(span / (30 * DAY))));
-          return buildSeries(earliest, span / buckets, buckets, (d) =>
-            d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "2-digit" }));
+          return buildSeries(
+            earliest,
+            span / buckets,
+            buckets,
+            (d) =>
+              d.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "2-digit",
+              })
+          );
         })(),
       };
 
@@ -366,16 +407,22 @@ export function setupAuth(app: Express) {
 
 const ADMIN_EMAIL = "johnmichaelkuczynski@gmail.com";
 
+// FIXED (Express 5 TS7030): call next() then return instead of return next()
 export const isAdmin: RequestHandler = (req, res, next) => {
-  if (req.isAuthenticated() && req.user?.email?.toLowerCase() === ADMIN_EMAIL) {
-    return next();
+  if (
+    req.isAuthenticated() &&
+    req.user?.email?.toLowerCase() === ADMIN_EMAIL
+  ) {
+    next();
+    return;
   }
   res.status(403).json({ error: "Not authorized" });
 };
 
 export const isAuthenticated: RequestHandler = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return next();
+    next();
+    return;
   }
   res.status(401).json({ error: "Not authenticated" });
 };
