@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-export function setupAuth(app: Express) {
+export async function setupAuth(app: Express) {
   // Strip invisible characters (non-breaking spaces, zero-width chars, BOM) and
   // surrounding whitespace that often sneak in when secrets are copy-pasted.
   const sanitizeSecret = (v?: string) =>
@@ -64,11 +64,27 @@ export function setupAuth(app: Express) {
     console.log("Session pool connected to database");
   });
 
+  // Ensure the session table exists using inline SQL — avoids the connect-pg-simple
+  // `createTableIfMissing` file-read path which breaks when esbuild bundles dist/
+  // and __dirname no longer points at the package's own table.sql.
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS "user_sessions" (
+      "sid"    varchar          NOT NULL COLLATE "default",
+      "sess"   json             NOT NULL,
+      "expire" timestamp(6)     NOT NULL,
+      CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE
+    ) WITH (OIDS=FALSE);
+    CREATE INDEX IF NOT EXISTS "IDX_session_expire" ON "user_sessions" ("expire");
+  `).catch((e: Error) => {
+    // Table already exists or index already exists — both are safe to ignore
+    if (!e.message.includes("already exists")) console.error("Session table init error:", e);
+  });
+
   // Session setup with database storage
   const pgStore = new PgSession({
     pool,
     tableName: "user_sessions",
-    createTableIfMissing: true,
+    createTableIfMissing: false,
     errorLog: console.error.bind(console, "Session store error:"),
   });
 

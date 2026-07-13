@@ -34,8 +34,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Set up Google OAuth session-based auth (passport + express-session).
-// Must be called before route registration.
-setupAuth(app);
+// Must be called before route registration. Async because it provisions
+// the session table via inline SQL on first boot.
+await setupAuth(app);
 
 app.use("/api", router);
 
