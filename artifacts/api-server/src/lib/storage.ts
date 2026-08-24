@@ -1,58 +1,11 @@
 import { db } from "@workspace/db";
-import { usersTable, visitsTable } from "@workspace/db";
-import { eq, desc, gte } from "drizzle-orm";
+import { visitsTable } from "@workspace/db";
+import { desc, gte } from "drizzle-orm";
 
-type User = typeof usersTable.$inferSelect;
 type Visit = typeof visitsTable.$inferSelect;
 
 export const storage = {
-  async getUserById(id: number): Promise<User | null> {
-    const [user] = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.id, id));
-    return user ?? null;
-  },
-
-  async getUserByGoogleId(googleId: string): Promise<User | null> {
-    const [user] = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.googleId, googleId));
-    return user ?? null;
-  },
-
-  async getUserByEmail(email: string): Promise<User | null> {
-    const [user] = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.email, email));
-    return user ?? null;
-  },
-
-  async createUserWithGoogle(data: {
-    username: string;
-    googleId: string;
-    email: string | null;
-    displayName: string | null;
-  }): Promise<User> {
-    const [user] = await db.insert(usersTable).values(data).returning();
-    return user!;
-  },
-
-  async updateUserGoogle(
-    id: number,
-    data: { googleId?: string; displayName?: string | null },
-  ): Promise<User> {
-    const [user] = await db
-      .update(usersTable)
-      .set(data)
-      .where(eq(usersTable.id, id))
-      .returning();
-    return user!;
-  },
-
-  async recordVisit(userId: number, email: string | null): Promise<void> {
+  async recordVisit(userId: number | null, email: string | null): Promise<void> {
     await db.insert(visitsTable).values({ userId, email });
   },
 

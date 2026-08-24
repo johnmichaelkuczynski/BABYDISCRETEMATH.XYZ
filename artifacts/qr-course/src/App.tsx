@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Switch,
   Route,
@@ -10,6 +11,7 @@ import {
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
+import Landing from "@/pages/Landing";
 
 import Dashboard from "@/pages/Dashboard";
 import Assignments from "@/pages/Assignments";
@@ -25,7 +27,6 @@ import ReasoningRunner from "@/pages/ReasoningRunner";
 import Grades from "@/pages/Grades";
 import AdminMode from "@/pages/AdminMode";
 import Administrative from "@/pages/Administrative";
-import { HomeRedirect, protectedComponent } from "@/auth";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 const queryClient = new QueryClient();
@@ -33,38 +34,38 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={HomeRedirect} />
-      <Route path="/dashboard" component={protectedComponent(Dashboard)} />
-      <Route path="/assignments" component={protectedComponent(Assignments)} />
+      <Route path="/" component={Landing} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/assignments" component={Assignments} />
       <Route
         path="/assignments/:id/practice"
-        component={protectedComponent(PracticeAssignment)}
+        component={PracticeAssignment}
       />
       <Route
         path="/assignments/:id"
-        component={protectedComponent(AssignmentRunner)}
+        component={AssignmentRunner}
       />
-      <Route path="/analytics" component={protectedComponent(Analytics)} />
-      <Route path="/reasoning" component={protectedComponent(Reasoning)} />
+      <Route path="/analytics" component={Analytics} />
+      <Route path="/reasoning" component={Reasoning} />
       <Route
         path="/reasoning/:id"
-        component={protectedComponent(ReasoningRunner)}
+        component={ReasoningRunner}
       />
-      <Route path="/grades" component={protectedComponent(Grades)} />
-      <Route path="/admin" component={protectedComponent(AdminMode)} />
-      <Route path="/administrative" component={protectedComponent(Administrative)} />
-      <Route path="/diagnostics" component={protectedComponent(Diagnostics)} />
+      <Route path="/grades" component={Grades} />
+      <Route path="/admin" component={AdminMode} />
+      <Route path="/administrative" component={Administrative} />
+      <Route path="/diagnostics" component={Diagnostics} />
       <Route
         path="/weeks/:weekNumber"
-        component={protectedComponent(WeekView)}
+        component={WeekView}
       />
       <Route
         path="/lectures/:lectureId"
-        component={protectedComponent(LectureView)}
+        component={LectureView}
       />
       <Route
         path="/practice/topic/:topicId"
-        component={protectedComponent(TopicPractice)}
+        component={TopicPractice}
       />
       <Route component={NotFound} />
     </Switch>
@@ -72,6 +73,12 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    void fetch(`${basePath}/api/visitor/record`, { method: "POST" }).catch(() => {
+      // Visitor analytics must never interrupt course access.
+    });
+  }, []);
+
   return (
     <WouterRouter base={basePath}>
       <QueryClientProvider client={queryClient}>

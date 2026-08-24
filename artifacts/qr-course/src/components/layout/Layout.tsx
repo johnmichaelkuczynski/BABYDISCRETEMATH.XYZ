@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, PenTool, BarChart3, Activity, RotateCcw, Sparkles, LogOut, Scale, GraduationCap, ShieldCheck, Search, Users } from "lucide-react";
+import { LayoutDashboard, PenTool, BarChart3, Activity, RotateCcw, Sparkles, Scale, GraduationCap, ShieldCheck, Search, Users } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useAuth, useLogout, useIsAdmin } from "@/auth";
 import { useAdminMode } from "@/lib/adminMode";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -10,7 +9,6 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 export function Sidebar() {
   const [location] = useLocation();
   const [adminMode] = useAdminMode();
-  const { isAdmin } = useIsAdmin();
 
   const navItems = [
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -21,9 +19,7 @@ export function Sidebar() {
     ...(adminMode
       ? [{ href: "/admin", label: "Administrator", icon: ShieldCheck }]
       : []),
-    ...(isAdmin
-      ? [{ href: "/administrative", label: "Administrative", icon: Users }]
-      : []),
+    { href: "/administrative", label: "Administrative", icon: Users },
   ];
 
   return (
@@ -71,8 +67,6 @@ function TopBar() {
   const active = location.startsWith("/diagnostics");
   const [adminMode, setAdminMode] = useAdminMode();
   const qc = useQueryClient();
-  const logout = useLogout();
-  const { user } = useAuth();
   const [resetting, setResetting] = useState(false);
   const [expanding, setExpanding] = useState(false);
   const [expandProgress, setExpandProgress] = useState<string | null>(null);
@@ -191,26 +185,6 @@ function TopBar() {
         {adminMode ? "Admin: On" : "Admin: Off"}
       </button>
 
-      <div className="mx-1 h-6 w-px bg-border" />
-
-      {user && (
-        <span
-          className="hidden sm:inline text-sm text-muted-foreground max-w-[12rem] truncate"
-          title={user.email ?? undefined}
-          data-testid="text-user-email"
-        >
-          {user.email ?? user.displayName ?? "Account"}
-        </span>
-      )}
-      <button
-        onClick={logout}
-        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium border border-border hover:bg-secondary"
-        data-testid="button-sign-out"
-        title="Sign out"
-      >
-        <LogOut className="w-4 h-4" />
-        Sign out
-      </button>
     </div>
   );
 }

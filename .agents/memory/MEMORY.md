@@ -1,6 +1,5 @@
 - [Course answer-key QC diagnostic](course-qc-diagnostic.md) — LLM key-legitimacy checks must judge against the course's own lecture text (not generic knowledge), or correct course-specific keys false-flag.
-- [Google OAuth auth](google-oauth-auth.md) — Clerk replaced with Passport.js + Google OAuth + express-session + connect-pg-simple; useAuth hook fetches /api/auth/user; /auth path must be in API server proxy.
-- [API auth model](api-auth-model.md) — single-user app: API has NO per-route server authz; Clerk gating is frontend-only. "Admin mode" + skipDetection are intentionally client-side flags, not a trust boundary.
+- [Public access with no login](api-auth-model.md) — authentication is intentionally absent; every route and feature is public, while anonymous visitor analytics remains database-backed.
 - [Tutor starter-question style](tutor-starter-questions.md) — lecture starter questions must ALWAYS be concrete-case application; never definition/abstract/comparison questions (user mandate).
 - [Course content reseed](course-content-reseed.md) — seeded data migrations must self-heal via a content marker + replace-in-transaction; "seed if empty" strands old content in existing/prod DBs (prod writes are read-only).
 - [DATABASE_URL override](database-url-override.md) — app DB resolves to platform `helium/heliumdb`, which overrides a user-set DATABASE_URL secret; checkDatabase() can report "not provisioned" while the app still has a working DB.

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Redirect } from "wouter";
 import {
   BarChart,
   Bar,
@@ -11,7 +10,6 @@ import {
   CartesianGrid,
 } from "recharts";
 import { Layout } from "@/components/layout/Layout";
-import { useAuth, useIsAdmin } from "@/auth";
 
 interface Bucket {
   label: string;
@@ -56,8 +54,6 @@ function StatCard({ label, value }: { label: string; value: number }) {
 }
 
 export default function Administrative() {
-  const { isLoading: authLoading } = useAuth();
-  const { isAdmin } = useIsAdmin();
   const [period, setPeriod] = useState<Period>("last24Hours");
 
   const { data, isLoading, error } = useQuery<AdminVisitsData>({
@@ -67,13 +63,9 @@ export default function Administrative() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res.json() as Promise<AdminVisitsData>;
     },
-    enabled: isAdmin,
     staleTime: 60_000,
     refetchInterval: 2 * 60_000,
   });
-
-  if (authLoading) return null;
-  if (!isAdmin) return <Redirect to="/dashboard" />;
 
   const chartData = data?.series[period] ?? [];
   const maxCount = Math.max(...chartData.map((b) => b.count), 1);
@@ -84,7 +76,7 @@ export default function Administrative() {
 
         <div>
           <h1 className="text-3xl font-serif font-bold text-primary">Administrative</h1>
-          <p className="text-muted-foreground mt-1">Google login activity for this app.</p>
+          <p className="text-muted-foreground mt-1">Visitor activity for this app.</p>
         </div>
 
         {isLoading && (
@@ -127,7 +119,7 @@ export default function Administrative() {
               <div className="h-56">
                 {chartData.every((b) => b.count === 0) ? (
                   <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
-                    No logins in this period.
+                    No visits in this period.
                   </div>
                 ) : (
                   <ResponsiveContainer width="100%" height="100%">
@@ -146,7 +138,7 @@ export default function Administrative() {
                         className="text-muted-foreground"
                       />
                       <Tooltip
-                        formatter={(value: number) => [value, "Logins"]}
+                        formatter={(value: number) => [value, "Visits"]}
                         contentStyle={{
                           fontSize: 12,
                           borderRadius: 6,
@@ -168,9 +160,9 @@ export default function Administrative() {
 
             <div className="rounded-lg border border-border bg-card flex flex-col">
               <div className="px-6 py-4 border-b border-border">
-                <h2 className="font-semibold text-base">Login Log</h2>
+                <h2 className="font-semibold text-base">Visitor Log</h2>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  {data.visits.length} most recent login events
+                  {data.visits.length} most recent visits
                 </p>
               </div>
               <div className="overflow-x-auto">
@@ -178,7 +170,7 @@ export default function Administrative() {
                   <thead>
                     <tr className="border-b border-border bg-secondary/40">
                       <th className="px-6 py-3 text-left font-medium text-muted-foreground">#</th>
-                      <th className="px-6 py-3 text-left font-medium text-muted-foreground">Gmail</th>
+                      <th className="px-6 py-3 text-left font-medium text-muted-foreground">Visitor</th>
                       <th className="px-6 py-3 text-left font-medium text-muted-foreground">When</th>
                     </tr>
                   </thead>
@@ -186,7 +178,7 @@ export default function Administrative() {
                     {data.visits.length === 0 && (
                       <tr>
                         <td colSpan={3} className="px-6 py-8 text-center text-muted-foreground">
-                          No logins recorded yet.
+                          No visits recorded yet.
                         </td>
                       </tr>
                     )}
@@ -199,7 +191,7 @@ export default function Administrative() {
                           {i + 1}
                         </td>
                         <td className="px-6 py-3 font-mono">
-                          {v.email ?? "—"}
+                          {v.email ?? "Anonymous visitor"}
                         </td>
                         <td className="px-6 py-3 text-muted-foreground">
                           {new Date(v.visitedAt).toLocaleString("en-US", {

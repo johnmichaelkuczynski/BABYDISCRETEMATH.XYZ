@@ -3,7 +3,7 @@ import cors from "cors";
 import pinoHttp from "pino-http";
 import path from "node:path";
 import fs from "node:fs";
-import { setupAuth } from "./auth";
+import { setupVisitorAnalytics } from "./visitorAnalytics";
 import router from "./routes";
 import { logger } from "./lib/logger";
 
@@ -33,10 +33,8 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Set up Google OAuth session-based auth (passport + express-session).
-// Must be called before route registration. Async because it provisions
-// the session table via inline SQL on first boot.
-await setupAuth(app);
+// Visitor analytics is intentionally independent from authentication.
+setupVisitorAnalytics(app);
 
 app.use("/api", router);
 

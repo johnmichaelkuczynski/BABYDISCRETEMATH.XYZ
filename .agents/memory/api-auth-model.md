@@ -1,14 +1,12 @@
 ---
-name: API auth model (single-user)
-description: How the Ethics 101 API treats authentication/authorization — important before adding "protected" or "admin" endpoints.
+name: Public access with no login
+description: The course intentionally has no authentication while retaining all course, diagnostic, administrative, and visitor analytics functionality.
 ---
 
-# API is single-user with no per-route server authz
+# Authentication is intentionally absent
 
-The api-server mounts `clerkMiddleware` (attaches auth context) but **routes do not gate on it** — no `userId` check, and submit/grade endpoints don't identify a user. The whole API is effectively callable without a session; Clerk gating lives only on the frontend (wouter `protectedComponent`).
+Do not add, restore, or assume a login gate. Every page, API route, diagnostic, grading flow, administrative tool, and analytics view must remain usable by any visitor without a session.
 
-**Why:** Ethics 101 is a single-user, self-paced course. The account owner is simultaneously the student and the "administrator." There is no second party to protect against, so detection/grading are self-imposed tooling, not a trust boundary.
+**Why:** The user explicitly removed the current login system so a different system can be created later, and required that removing login must not reduce or alter any other functionality.
 
-**How to apply:**
-- "Admin mode" is intentionally a client-side `localStorage` flag (`lib/adminMode.ts`); `skipDetection` on submit and `/api/admin/grader-lab` are not server-authz'd by design — consistent with every other endpoint.
-- Do NOT assume any endpoint is protected server-side. If a future task genuinely needs a trust boundary (multi-user, cost abuse), that requires adding per-route Clerk authz across the whole API — a deliberate, in-scope architectural change, not a one-endpoint patch.
+**How to apply:** Keep anonymous visitor recording and database-backed visit counts, graphs, and logs operational. Treat any future authentication system as a separate, explicitly requested project-wide change.
