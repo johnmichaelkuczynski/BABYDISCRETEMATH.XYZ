@@ -8,6 +8,8 @@ import {
   Search,
 } from "lucide-react";
 
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 const features = [
   {
     icon: BookOpen,
@@ -142,9 +144,34 @@ export default function Landing() {
         </section>
       </main>
 
-      <footer className="border-t border-border px-6 py-6 text-center text-sm text-muted-foreground">
-        Basic Discrete Math — where the curriculum, the tutor, the grader, and the
-        integrity check all live in one room.
+      <footer className="border-t border-border px-6 py-6">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-center sm:text-left text-sm text-muted-foreground">
+            Basic Discrete Math — where the curriculum, the tutor, the grader, and the
+            integrity check all live in one room.
+          </p>
+          <div className="flex items-center gap-4 shrink-0">
+            <a
+              href="mailto:jmkuczynski@yahoo.com"
+              className="text-sm font-medium text-primary hover:underline"
+            >
+              Contact Us
+            </a>
+            <a
+              href="https://zhisystems.ai/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit ZHI Systems"
+              className="rounded-md border border-border bg-white p-1 transition-opacity hover:opacity-80"
+            >
+              <img
+                src={`${basePath}/brand/zhi-systems-logo.png`}
+                alt="ZHI Systems"
+                className="h-10 w-auto"
+              />
+            </a>
+          </div>
+        </div>
       </footer>
     </div>
   );

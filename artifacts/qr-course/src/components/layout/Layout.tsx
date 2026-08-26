@@ -55,8 +55,26 @@ export function Sidebar() {
         })}
       </div>
 
-      <div className="p-4 border-t border-border text-xs text-muted-foreground text-center">
-        Basic Discrete Math
+      <div className="p-4 border-t border-border flex items-center justify-between gap-3">
+        <a
+          href="https://zhisystems.ai/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Visit ZHI Systems"
+          className="shrink-0 rounded-md border border-border bg-white p-1 transition-opacity hover:opacity-80"
+        >
+          <img
+            src={`${basePath}/brand/zhi-systems-logo.png`}
+            alt="ZHI Systems"
+            className="h-10 w-auto"
+          />
+        </a>
+        <a
+          href="mailto:jmkuczynski@yahoo.com"
+          className="text-sm font-medium text-primary hover:underline"
+        >
+          Contact Us
+        </a>
       </div>
     </div>
   );
